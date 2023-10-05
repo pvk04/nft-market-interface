@@ -2,20 +2,20 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, Form, Button } from "react-bootstrap";
 import { FormEvent } from "react";
-import { contract, web3 } from "../../config/connection";
+import { contract } from "../../config/connection";
+import { useAuth } from "../../hook/useAuth";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
-
 import createTransaction from "../../utils/createTransaction";
 
 function LoginPage(): JSX.Element {
+	const navigate = useNavigate();
+	const location = useLocation();
+	const { signin } = useAuth();
+
 	const [currentAddress, setCurrentAddress] = useState("");
 	const [notRegistered, setNotRegistered] = useState(false);
 	const [invalidLogin, setInvalidLogin] = useState(false);
-
 	const [login, setLogin] = useState("");
-
-	const navigate = useNavigate();
-	const location = useLocation();
 
 	const fromPage = location.state?.from?.pathname || "/";
 
@@ -35,11 +35,18 @@ function LoginPage(): JSX.Element {
 	async function loginAccount() {
 		try {
 			const userConnected = await contract.methods.getUser(currentAddress).call({ from: currentAddress });
-			console.log(userConnected);
+			
 			// if user isnt registered in smart contract
 			if (userConnected.role === BigInt(0)) {
 				setNotRegistered(true);
+				return;
 			}
+
+			// creating user object to set it in context
+			const user = {...userConnected, address: currentAddress};
+			signin(user, () => {				
+				navigate(fromPage);
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -48,8 +55,16 @@ function LoginPage(): JSX.Element {
 	// register smart contract account
 	async function registerAccount() {
 		try {
-			const registrationAnswer = await contract.methods.registration(currentAddress, login).send({ from: currentAddress });
-			console.log(registrationAnswer);
+			const hash = await createTransaction(currentAddress, 'registration', [currentAddress, login]);
+			console.log(hash);
+			
+			const userConnected = await contract.methods.getUser(currentAddress).call({ from: currentAddress });
+			
+			// creating user object to set it in context
+			const user = {...userConnected, address: currentAddress};
+			signin(user, () => {				
+				navigate(fromPage);
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -57,13 +72,16 @@ function LoginPage(): JSX.Element {
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		// call registration func
+
+		// registration
 		if (notRegistered) {
+			// login validation
 			setInvalidLogin(false);
 			if (login.length < 3) {
 				setInvalidLogin(true);
 				return;
 			}
+			// call registration func
 			registerAccount();
 			return;
 		}

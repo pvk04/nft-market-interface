@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RequireAuth from "./hoc/RequireAuth";
 import MainPage from "./pages/MainPage/MainPage";
 import { useEffect } from "react";
+import { AuthProvider } from "./hoc/AuthProvider";
 
 function App() {
 	const navigate = useNavigate();
@@ -24,18 +25,20 @@ function App() {
 
 	return (
 		<div className="App">
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<RequireAuth>
-							<MainPage />
-						</RequireAuth>
-					}
-				/>
-				<Route path="/login" element={<LoginPage />} />
-				<Route path="/error" element={<ErrorPage errorCode={403} errorMessage={"У вас нет расширения METAMASK"} />} />
-			</Routes>
+			<AuthProvider>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<RequireAuth>
+								<MainPage />
+							</RequireAuth>
+						}
+					/>
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/error" element={<ErrorPage errorCode={403} errorMessage={"У вас нет расширения METAMASK"} />} />
+				</Routes>
+			</AuthProvider>
 		</div>
 	);
 }

@@ -5,7 +5,8 @@ import { FormEvent } from "react";
 import { contract } from "../../config/connection";
 import { useAuth } from "../../hook/useAuth";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
-import createTransaction from "../../utils/createTransaction";
+import createTransaction from "../../services/createTransaction";
+import getUser from "services/getUser";
 
 function LoginPage(): JSX.Element {
 	const navigate = useNavigate();
@@ -34,16 +35,14 @@ function LoginPage(): JSX.Element {
 	// authorize in smart contract account
 	async function loginAccount() {
 		try {
-			const userConnected = await contract.methods.getUser(currentAddress).call({ from: currentAddress });
+			const user = await getUser(currentAddress);
 			
 			// if user isnt registered in smart contract
-			if (userConnected.role === BigInt(0)) {
+			if (user.role === BigInt(0)) {
 				setNotRegistered(true);
 				return;
 			}
 
-			// creating user object to set it in context
-			const user = {...userConnected, address: currentAddress};
 			signin(user, () => {				
 				navigate(fromPage);
 			});
@@ -55,16 +54,8 @@ function LoginPage(): JSX.Element {
 	// register smart contract account
 	async function registerAccount() {
 		try {
-			const hash = await createTransaction(currentAddress, 'registration', [currentAddress, login]);
-			console.log(hash);
-			
-			const userConnected = await contract.methods.getUser(currentAddress).call({ from: currentAddress });
-			
-			// creating user object to set it in context
-			const user = {...userConnected, address: currentAddress};
-			signin(user, () => {				
-				navigate(fromPage);
-			});
+			await createTransaction(currentAddress, 'registration', [currentAddress, login]);
+			await loginAccount();
 		} catch (error) {
 			console.log(error);
 		}

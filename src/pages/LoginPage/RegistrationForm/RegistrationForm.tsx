@@ -1,5 +1,4 @@
 import { Form, InputGroup } from "react-bootstrap";
-import { useState } from "react";
 
 interface RegistrationFormProps {
 	login: string;
@@ -11,7 +10,7 @@ function RegistrationForm({ login, setLogin, invalidLogin }: RegistrationFormPro
 	return (
 		<Form.Group>
 			<InputGroup>
-				<InputGroup.Text>Логин</InputGroup.Text>
+				<InputGroup.Text>Никнейм</InputGroup.Text>
 				<Form.Control value={login} onChange={(e) => setLogin(e.target.value)} isInvalid={invalidLogin} />
 				<Form.Control.Feedback type="invalid">Пожалуйста, введите логин длиной не менее 3 символов</Form.Control.Feedback>
 			</InputGroup>

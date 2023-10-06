@@ -2,7 +2,10 @@
 	"compilerOptions": {
 		"target": "ES6",
 		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
+		"allowJs": true,"baseUrl": "./src",
+		"paths": {
+		  "@assets/*": ["assets/*"]
+		},
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
@@ -17,5 +20,5 @@
 		"jsx": "react-jsx",
 		"plugins": [{ "name": "typescript-plugin-css-modules" }]
 	},
-	"include": ["src"]
+	"include": ["src", "src/custom.d.ts"]
 }

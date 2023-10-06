@@ -4,12 +4,12 @@ import { Form, InputGroup, Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { web3 } from "../../config/connection"
 import createTransaction from "../../services/createTransaction";
-import styles from "./Profile.module.css";
+import styles from "./ProfilePage.module.css";
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import getUser from "services/getUser";
 
-function Profile() {
+function ProfilePage() {
     const { user, signin } = useAuth();
     const [refValue, setRefValue] = useState("");
     const [refCodePending, setRefCodePending] = useState(false);
@@ -85,4 +85,4 @@ function Profile() {
     )
 }
 
-export default Profile;
+export default ProfilePage;

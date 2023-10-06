@@ -33,7 +33,7 @@ function AsideBar() {
 				</ul>
 			</nav>
 			<button className={styles.logout}>
-				<img src="/assets/images/logout.svg" alt="" />
+				<img src="/images/logout.svg" alt="" />
 				<span>Выход</span>
 			</button>
 		</aside>

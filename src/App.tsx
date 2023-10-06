@@ -5,7 +5,8 @@ import RequireAuth from "./hoc/RequireAuth";
 import MainPage from "./pages/MainPage/MainPage";
 import { useEffect } from "react";
 import { AuthProvider } from "./hoc/AuthProvider";
-import Profile from "./components/Profile/Profile";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import NftPage from "pages/NftPage/NftPage";
 
 function App() {
 	const navigate = useNavigate();
@@ -31,13 +32,13 @@ function App() {
 					<Route
 						path="/*"
 						element={
-							<RequireAuth>
+							// <RequireAuth>
 								<MainPage />
-							</RequireAuth>
+							// </RequireAuth>
 						}
 					>
-						<Route path="profile" element={<Profile/>} />
-						<Route path="collection" element={<h1>collection</h1>} />
+						<Route path="profile" element={<ProfilePage/>} />
+						<Route path="collection" element={<NftPage />} />
 						<Route path="market" element={<h1>market</h1>} />
 					</Route>
 					<Route path="/login" element={<LoginPage />} />

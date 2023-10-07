@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./AsideBar.module.css";
 
 const MenuItems = [
-	{ name: "Профиль", href: "/profile"},
+	{ name: "Профиль", href: "/profile" },
 	{ name: "Мои нфт", href: "/collection" },
 	{ name: "Маркет", href: "/market" },
 ];
@@ -19,12 +19,7 @@ function AsideBar() {
 				<ul className={styles.navList}>
 					{MenuItems.map(({ name, href }, index) => (
 						<li className={styles.navListElement} key={index}>
-							<NavLink
-								className={({ isActive }) =>
-									isActive ? styles.navListElementActive : ``
-								}
-								to={href}
-							>
+							<NavLink className={({ isActive }) => (isActive ? styles.navListElementActive : ``)} to={href}>
 								{/* <img src={icon} alt="" /> */}
 								<span>{name}</span>
 							</NavLink>

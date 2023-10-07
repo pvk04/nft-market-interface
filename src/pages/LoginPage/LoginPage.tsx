@@ -36,14 +36,14 @@ function LoginPage(): JSX.Element {
 	async function loginAccount() {
 		try {
 			const user = await getUser(currentAddress);
-			
+
 			// if user isnt registered in smart contract
 			if (user.role === BigInt(0)) {
 				setNotRegistered(true);
 				return;
 			}
 
-			signin(user, () => {				
+			signin(user, () => {
 				navigate(fromPage);
 			});
 		} catch (error) {
@@ -54,7 +54,7 @@ function LoginPage(): JSX.Element {
 	// register smart contract account
 	async function registerAccount() {
 		try {
-			await createTransaction(currentAddress, 'registration', [currentAddress, login]);
+			await createTransaction(currentAddress, "registration", [currentAddress, login]);
 			await loginAccount();
 		} catch (error) {
 			console.log(error);

@@ -2,15 +2,15 @@ import { createContext, useState, FunctionComponent, ReactNode } from "react";
 import { IUser, UserContextType } from "../@types/user";
 
 const initialUser: IUser = {
-	login: '',
-	address: '',
+	login: "",
+	address: "",
 	role: BigInt(0),
 	discount: BigInt(0),
-	refCode: '',
-	refCodeUsed: true
-}
+	refCode: "",
+	refCodeUsed: true,
+};
 
-export const AuthContext = createContext<UserContextType>({user: initialUser, signin: () => null, signout: () => null});
+export const AuthContext = createContext<UserContextType>({ user: initialUser, signin: () => null, signout: () => null });
 
 interface AuthProviderProps {
 	children: ReactNode;

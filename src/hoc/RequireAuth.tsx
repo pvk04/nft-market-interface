@@ -8,7 +8,7 @@ interface RequireAuthProps {
 function RequireAuth({ children }: RequireAuthProps): any {
 	const location = useLocation();
 	const authContext = useAuth();
-	
+
 	if (authContext.user.role === BigInt(0)) {
 		return <Navigate to="/login" state={{ from: location }} />;
 	}

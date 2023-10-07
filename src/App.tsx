@@ -33,11 +33,11 @@ function App() {
 						path="/*"
 						element={
 							// <RequireAuth>
-								<MainPage />
+							<MainPage />
 							// </RequireAuth>
 						}
 					>
-						<Route path="profile" element={<ProfilePage/>} />
+						<Route path="profile" element={<ProfilePage />} />
 						<Route path="collection" element={<NftPage />} />
 						<Route path="market" element={<h1>market</h1>} />
 					</Route>

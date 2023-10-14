@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../hook/useAuth";
 import { Form, InputGroup, Button } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { web3 } from "../../config/connection";
 import createTransaction from "../../services/createTransaction";
 import styles from "./ProfilePage.module.css";
@@ -92,7 +92,6 @@ function ProfilePage() {
 				</InputGroup>
 			)}
 			{user.refCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
-			<ToastContainer />
 		</div>
 	);
 }

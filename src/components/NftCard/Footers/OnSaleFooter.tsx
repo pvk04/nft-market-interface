@@ -8,15 +8,16 @@ function OnSaleFooter({
 	cancelSale,
 }: {
 	price: string | number;
-	changePrice: (price: string | number) => void;
+	changePrice: (price: string | number, cb: () => void) => void;
 	cancelSale: () => void;
 }) {
 	const [newPrice, setNewPrice] = useState(price);
 	const [editPrice, setEditPrice] = useState(false);
 
 	function handleChangePrice() {
-		changePrice(newPrice);
-		setEditPrice(false);
+		changePrice(newPrice, () => {
+			setEditPrice(false);
+		});
 	}
 
 	function handleCancelChange() {

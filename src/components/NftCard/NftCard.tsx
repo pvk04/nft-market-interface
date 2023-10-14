@@ -34,6 +34,36 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		});
 	}
 
+	async function handleChangePrice(price: number | string, cb: () => void) {
+		const confirmation = await confirmDialog({
+			title: "Подтверждение",
+			description: "Вы действительно хотите изменить цену НФТ?",
+			handleClose: () => {
+				console.log("close");
+			},
+			handleConfirm: () => {
+				console.log("confirm");
+			},
+		});
+		if (!confirmation) return;
+
+		nft.price = price;
+		changeNft(nft, index);
+		//
+		toast.success("Цена НФТ изменена", {
+			position: "top-right",
+			autoClose: 1500,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+			theme: "dark",
+		});
+
+		cb();
+	}
+
 	return (
 		<Card style={{ height: "100%" }}>
 			<Card.Img variant="top" src={nft.img} />
@@ -48,9 +78,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 				{nft.isOnSale && (
 					<OnSaleFooter
 						price={nft.price}
-						changePrice={(price) => {
-							nft.price = price;
-						}}
+						changePrice={handleChangePrice}
 						cancelSale={() => {
 							console.log("cancel sale");
 						}}

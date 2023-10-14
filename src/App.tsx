@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { AuthProvider } from "./hoc/AuthProvider";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import NftPage from "pages/NftPage/NftPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	const navigate = useNavigate();
@@ -45,6 +46,7 @@ function App() {
 					<Route path="/error" element={<ErrorPage errorCode={403} errorMessage={"У вас нет расширения METAMASK"} />} />
 				</Routes>
 			</AuthProvider>
+			<ToastContainer />
 		</div>
 	);
 }

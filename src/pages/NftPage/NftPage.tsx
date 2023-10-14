@@ -1,45 +1,66 @@
 import { useState } from "react";
-import { Card, Button, Form, Row, Col } from "react-bootstrap";
-import { ChangeEvent } from "react";
+import { Card, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import styles from "./NftPage.module.css";
+import { confirmDialog } from "components/ConfirmDialog/ConfirmDialog";
+import NftCard from "components/NftCard/NftCard";
 
 const myNFTs = [
 	{
 		name: "nft 1",
-		descripiton: "test tes testests",
-		img: "/images/examplenft.jpg",
+		description: "test tes testests",
+		img: "http://localhost:4000/file/f00b6091-a50f-46fd-bdcb-1b937ffd7a22.webp",
+		isOnSale: false,
+		price: "12",
 	},
 	{
 		name: "nft 2",
-		descripiton: "lorem ipsum madand doah daoshdas",
-		img: "/images/examplenft.jpg",
+		description: "lorem ipsum madand doah daoshdas",
+		img: "http://localhost:4000/file/f30c6d3e-0285-421b-848c-e8d8e6f8d705.webp",
+		isOnSale: false,
+		price: "22",
 	},
 	{
 		name: "nft 3",
-		descripiton: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
+		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
 		img: "/images/examplenft.jpg",
+		isOnSale: false,
+		price: "33",
 	},
 	{
 		name: "nft 3",
-		descripiton: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
+		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
 		img: "/images/examplenft.jpg",
+		isOnSale: false,
+		price: "43",
 	},
 	{
 		name: "nft 3",
-		descripiton: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
+		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
 		img: "/images/examplenft.jpg",
+		isOnSale: false,
+		price: "32",
 	},
 	{
 		name: "nft 3",
-		descripiton: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
+		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
 		img: "/images/examplenft.jpg",
+		isOnSale: false,
+		price: "23",
 	},
 ];
 
 function NftPage() {
+	const [nfts, setNfts] = useState<INft[]>(myNFTs);
+	const [isConfirmation, setIsConfirmation] = useState(false);
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
 
-	function handleFileInputChange(event: ChangeEvent<HTMLInputElement>) {
+	function handleChangeNft(changedNft: INft, index: number) {
+		const newNftArr: INft[] = [...nfts];
+		newNftArr[index] = changedNft;
+		setNfts(newNftArr);
+	}
+
+	function handleFileInputChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const selectedFile = event.target.files?.[0];
 		console.log(selectedFile);
 
@@ -55,9 +76,26 @@ function NftPage() {
 		setLoadedImage(null);
 	}
 
+	async function sellNft(nft: any) {
+		const confirmation = await confirmDialog({
+			title: "Подтверждение",
+			description: "Вы действительно хотите выставить на продажу?",
+			handleClose: () => {
+				console.log("close");
+			},
+			handleConfirm: () => {
+				console.log("confirm");
+			},
+		});
+		if (!confirmation) return;
+		nft.isOnSale = true;
+		console.log(nft);
+		setIsConfirmation(false);
+	}
+
 	return (
 		<Row className={styles.nftContainer}>
-			<Col>
+			{/* <Col>
 				<Card style={{ width: "18rem" }}>
 					<Card.Img variant="top" src={loadedImage ?? "/images/examplenft.jpg"} />
 					<Card.Body>
@@ -83,25 +121,13 @@ function NftPage() {
 						<Button variant="primary">Создать</Button>
 					</Card.Footer>
 				</Card>
-			</Col>
+			</Col> */}
 
-			{/* {myNFTs.map((nft) => (
-                <Col xs={12} sm={6} md={3} style={{marginBottom: "15px"}}>
-                <Card style={{height: "100%"}}>
-                <Card.Img variant="top" src={nft.img} />
-                <Card.Body>
-                    <Card.Title>{nft.name}</Card.Title>
-                    <Form.Group className="mb-3">
-                        <Form.Label id="namenft">{nft.descripiton}</Form.Label>
-                    </Form.Group>
-                </Card.Body>
-                <Card.Footer>
-                    <Button variant="primary">Продать</Button>
-                </Card.Footer>
-            </Card>
-                </Col>
-               
-            ))} */}
+			{nfts.map((nft, index) => (
+				<Col xs={12} sm={6} md={3} style={{ marginBottom: "15px" }} key={index}>
+					<NftCard index={index} nft={nft} changeNft={handleChangeNft} />
+				</Col>
+			))}
 		</Row>
 	);
 }

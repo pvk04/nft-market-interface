@@ -1,4 +1,5 @@
 interface INft {
+	arrayIndex: MatchPrimitiveType<"uint256", bigint>;
 	erc20id: MatchPrimitiveType<"uint256", bigint>;
 	name: string;
 	description: string;

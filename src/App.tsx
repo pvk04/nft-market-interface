@@ -33,9 +33,9 @@ function App() {
 					<Route
 						path="/*"
 						element={
-							// <RequireAuth>
-							<MainPage />
-							// </RequireAuth>
+							<RequireAuth>
+								<MainPage />
+							</RequireAuth>
 						}
 					>
 						<Route path="profile" element={<ProfilePage />} />

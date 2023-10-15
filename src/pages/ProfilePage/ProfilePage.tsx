@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import getUser from "services/getUser";
 
 function ProfilePage() {
-	const { user, signin } = useAuth();
+	const { user, signin } = useAuth();	
 	const [refValue, setRefValue] = useState("");
 	const [refCodePending, setRefCodePending] = useState(false);
 
@@ -76,7 +76,7 @@ function ProfilePage() {
 				</p>
 			</div>
 			<p>Скидка за друзей: {Number(user.discount)}%</p>
-			{!user.refCodeUsed && (
+			{!user.isRefCodeUsed && (
 				<InputGroup className="mb-3">
 					<Form.Control
 						placeholder="Введите реферальный код друга"
@@ -91,7 +91,7 @@ function ProfilePage() {
 					</Button>
 				</InputGroup>
 			)}
-			{user.refCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
+			{user.isRefCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
 		</div>
 	);
 }

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import styles from "./NftPage.module.css";
 import { confirmDialog } from "components/ConfirmDialog/ConfirmDialog";
 import NftCard from "components/NftCard/NftCard";
+import { contract } from "config/connection";
 
 const myNFTs = [
 	{
@@ -50,9 +51,19 @@ const myNFTs = [
 ];
 
 function NftPage() {
-	const [nfts, setNfts] = useState<INft[]>(myNFTs);
+	const [nfts, setNfts] = useState<INft[] | []>([]);
 	const [isConfirmation, setIsConfirmation] = useState(false);
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
+
+	useEffect(() => {
+		contract.methods
+			.getNfts()
+			.call()
+			.then((result) => {
+				console.log(result);
+				setNfts(result);
+			});
+	}, []);
 
 	function handleChangeNft(changedNft: INft, index: number) {
 		const newNftArr: INft[] = [...nfts];
@@ -76,7 +87,7 @@ function NftPage() {
 		setLoadedImage(null);
 	}
 
-	async function sellNft(nft: any) {
+	async function sellNft(nft: INft) {
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите выставить на продажу?",
@@ -125,7 +136,7 @@ function NftPage() {
 
 			{nfts.map((nft, index) => (
 				<Col xs={12} sm={6} md={3} style={{ marginBottom: "15px" }} key={index}>
-					<NftCard index={index} nft={nft} changeNft={handleChangeNft} />
+					<NftCard index={index} nft={{...nft}} changeNft={handleChangeNft} />
 				</Col>
 			))}
 		</Row>

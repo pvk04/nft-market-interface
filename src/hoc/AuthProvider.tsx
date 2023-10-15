@@ -7,7 +7,7 @@ const initialUser: IUser = {
 	role: BigInt(0),
 	discount: BigInt(0),
 	refCode: "",
-	refCodeUsed: true,
+	isRefCodeUsed: true,
 };
 
 export const AuthContext = createContext<UserContextType>({ user: initialUser, signin: () => null, signout: () => null });

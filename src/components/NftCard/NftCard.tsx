@@ -19,7 +19,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		});
 		if (!confirmation) return;
 		nft.isOnSale = true;
-		nft.price = price;
+		nft.price = BigInt(price);
 		changeNft(nft, index);
 		//
 		toast.success("НФТ выставлено на продажу", {
@@ -34,7 +34,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		});
 	}
 
-	async function handleChangePrice(price: number | string, cb: () => void) {
+	async function handleChangePrice(price: bigint | string, cb: () => void) {
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите изменить цену НФТ?",
@@ -47,7 +47,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		});
 		if (!confirmation) return;
 
-		nft.price = price;
+		nft.price = BigInt(price);
 		changeNft(nft, index);
 		//
 		toast.success("Цена НФТ изменена", {
@@ -66,7 +66,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 
 	return (
 		<Card style={{ height: "100%" }}>
-			<Card.Img variant="top" src={nft.img} />
+			<Card.Img variant="top" src={nft.pictureURL} />
 			<Card.Body>
 				<Card.Title>{nft.name}</Card.Title>
 				<Form.Group className="mb-3">
@@ -77,7 +77,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 				{!nft.isOnSale && <SaleFooter sellNft={sellNft} />}
 				{nft.isOnSale && (
 					<OnSaleFooter
-						price={nft.price}
+						price={BigInt(nft.price)}
 						changePrice={handleChangePrice}
 						cancelSale={() => {
 							console.log("cancel sale");

@@ -36,6 +36,7 @@ function LoginPage(): JSX.Element {
 	async function loginAccount() {
 		try {
 			const user = await getUser(currentAddress);
+			console.log(user);
 
 			// if user isnt registered in smart contract
 			if (user.role === BigInt(0)) {

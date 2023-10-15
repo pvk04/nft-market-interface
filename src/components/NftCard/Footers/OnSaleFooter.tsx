@@ -7,15 +7,15 @@ function OnSaleFooter({
 	changePrice,
 	cancelSale,
 }: {
-	price: string | number;
-	changePrice: (price: string | number, cb: () => void) => void;
+	price: string | bigint;
+	changePrice: (price: string | bigint, cb: () => void) => void;
 	cancelSale: () => void;
 }) {
 	const [newPrice, setNewPrice] = useState(price);
 	const [editPrice, setEditPrice] = useState(false);
 
 	function handleChangePrice() {
-		changePrice(newPrice, () => {
+		changePrice(BigInt(newPrice), () => {
 			setEditPrice(false);
 		});
 	}
@@ -29,7 +29,7 @@ function OnSaleFooter({
 		<>
 			<InputGroup>
 				<Form.Control
-					value={newPrice}
+					value={Number(newPrice)}
 					onChange={(e) => setNewPrice(e.target.value)}
 					disabled={!editPrice}
 					placeholder="Цена"

@@ -1,1351 +1,1801 @@
 export type abiType = [
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		inputs: [
+			{
+				internalType: "uint256[]";
+				name: "ids";
+				type: "uint256[]";
+			},
+			{
+				internalType: "string";
+				name: "collectionName";
+				type: "string";
+			}
+		];
+		name: "addNftsToCollection";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
 	},
 	{
-		"inputs": [],
-		"name": "NFT",
-		"outputs": [
+		inputs: [
 			{
-				"internalType": "contract Nft",
-				"name": "",
-				"type": "address"
+				internalType: "bytes";
+				name: "refCode";
+				type: "bytes";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		name: "applyRefCode";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
 	},
 	{
-		"inputs": [],
-		"name": "TOKEN",
-		"outputs": [
+		inputs: [
 			{
-				"internalType": "contract Token",
-				"name": "",
-				"type": "address"
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		name: "buyNft";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "bytes",
-				"name": "refCode",
-				"type": "bytes"
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
 			}
-		],
-		"name": "applyReferalCode",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "cancelSellNft";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "auctions",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "collectionId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "startPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "maxPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "startTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "endTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "status",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		inputs: [];
+		stateMutability: "nonpayable";
+		type: "constructor";
 	},
 	{
-		"inputs": [
+		anonymous: false;
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
+				indexed: true;
+				internalType: "address";
+				name: "_from";
+				type: "address";
 			},
 			{
-				"internalType": "uint256",
-				"name": "betPrice",
-				"type": "uint256"
+				indexed: true;
+				internalType: "address";
+				name: "_sellerAddress";
+				type: "address";
+			},
+			{
+				indexed: false;
+				internalType: "uint256";
+				name: "nftId";
+				type: "uint256";
 			}
-		],
-		"name": "bet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "buyNftEvent";
+		type: "event";
 	},
 	{
-		"inputs": [
+		anonymous: false;
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
+				indexed: true;
+				internalType: "address";
+				name: "_from";
+				type: "address";
+			},
+			{
+				indexed: false;
+				internalType: "uint256";
+				name: "nftId";
+				type: "uint256";
 			}
-		],
-		"name": "buyNft",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "cancelSellNftEvent";
+		type: "event";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "collections",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "isBuyed",
-				"type": "bool"
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
 			},
 			{
-				"internalType": "bool",
-				"name": "onSale",
-				"type": "bool"
+				internalType: "uint256";
+				name: "newPrice";
+				type: "uint256";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		name: "changeNftPrice";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
 	},
 	{
-		"inputs": [
+		anonymous: false;
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "collectionId",
-				"type": "uint256"
+				indexed: true;
+				internalType: "address";
+				name: "_from";
+				type: "address";
 			},
 			{
-				"internalType": "uint256",
-				"name": "startPrice",
-				"type": "uint256"
+				indexed: false;
+				internalType: "uint256";
+				name: "nftId";
+				type: "uint256";
 			},
 			{
-				"internalType": "uint256",
-				"name": "maxPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "startTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "endTime",
-				"type": "uint256"
+				indexed: false;
+				internalType: "uint256";
+				name: "newPrice";
+				type: "uint256";
 			}
-		],
-		"name": "createAuction",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "changePriceNftEvent";
+		type: "event";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
+				internalType: "string";
+				name: "collection";
+				type: "string";
+			},
+			{
+				internalType: "uint256";
+				name: "timeStart";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "timeEnd";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "startPrice";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "maxPrice";
+				type: "uint256";
 			}
-		],
-		"name": "endAuction",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "createAuction";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
+				internalType: "string";
+				name: "name";
+				type: "string";
+			},
+			{
+				internalType: "string";
+				name: "description";
+				type: "string";
 			}
-		],
-		"name": "getAuction",
-		"outputs": [
+		];
+		name: "createCollection";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		anonymous: false;
+		inputs: [
 			{
-				"components": [
+				indexed: true;
+				internalType: "address";
+				name: "_from";
+				type: "address";
+			},
+			{
+				components: [
 					{
-						"internalType": "uint256",
-						"name": "collectionId",
-						"type": "uint256"
+						internalType: "uint256";
+						name: "erc20id";
+						type: "uint256";
 					},
 					{
-						"internalType": "uint256",
-						"name": "startPrice",
-						"type": "uint256"
+						internalType: "string";
+						name: "name";
+						type: "string";
 					},
 					{
-						"internalType": "uint256",
-						"name": "maxPrice",
-						"type": "uint256"
+						internalType: "string";
+						name: "description";
+						type: "string";
 					},
 					{
-						"internalType": "uint256",
-						"name": "startTime",
-						"type": "uint256"
+						internalType: "string";
+						name: "pictureURL";
+						type: "string";
 					},
 					{
-						"internalType": "uint256",
-						"name": "endTime",
-						"type": "uint256"
+						internalType: "string";
+						name: "collection";
+						type: "string";
 					},
 					{
-						"components": [
+						internalType: "uint256";
+						name: "price";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "creationDate";
+						type: "uint256";
+					},
+					{
+						internalType: "address";
+						name: "owner";
+						type: "address";
+					},
+					{
+						internalType: "bool";
+						name: "isOnSale";
+						type: "bool";
+					},
+					{
+						internalType: "bool";
+						name: "isSoldFromOwner";
+						type: "bool";
+					}
+				];
+				indexed: false;
+				internalType: "struct Profi.Nft";
+				name: "nft";
+				type: "tuple";
+			}
+		];
+		name: "createNftEvent";
+		type: "event";
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
+			}
+		];
+		name: "endAuction";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
+			},
+			{
+				internalType: "address";
+				name: "user";
+				type: "address";
+			}
+		];
+		name: "giftNft";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "increaseValue";
+				type: "uint256";
+			}
+		];
+		name: "increaseBet";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "bet";
+				type: "uint256";
+			}
+		];
+		name: "makeBet";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		anonymous: false;
+		inputs: [
+			{
+				indexed: true;
+				internalType: "address";
+				name: "_from";
+				type: "address";
+			},
+			{
+				indexed: false;
+				internalType: "uint256";
+				name: "nftId";
+				type: "uint256";
+			}
+		];
+		name: "makeSellNftEvent";
+		type: "event";
+	},
+	{
+		inputs: [
+			{
+				internalType: "string";
+				name: "name";
+				type: "string";
+			},
+			{
+				internalType: "string";
+				name: "description";
+				type: "string";
+			},
+			{
+				internalType: "string";
+				name: "pictureURL";
+				type: "string";
+			}
+		];
+		name: "mintNft";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "address";
+				name: "user";
+				type: "address";
+			},
+			{
+				internalType: "string";
+				name: "login";
+				type: "string";
+			}
+		];
+		name: "registration";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256";
+				name: "id";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "price";
+				type: "uint256";
+			}
+		];
+		name: "sellNft";
+		outputs: [];
+		stateMutability: "nonpayable";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256";
+				name: "";
+				type: "uint256";
+			}
+		];
+		name: "auctions";
+		outputs: [
+			{
+				internalType: "string";
+				name: "collection";
+				type: "string";
+			},
+			{
+				internalType: "uint256";
+				name: "startPrice";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "maxPrice";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "timeCreation";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "timeStart";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "timeEnd";
+				type: "uint256";
+			},
+			{
+				internalType: "bool";
+				name: "status";
+				type: "bool";
+			}
+		];
+		stateMutability: "view";
+		type: "function";
+	},
+	{
+		inputs: [];
+		name: "getAuctions";
+		outputs: [
+			{
+				components: [
+					{
+						internalType: "string";
+						name: "collection";
+						type: "string";
+					},
+					{
+						internalType: "uint256";
+						name: "startPrice";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "maxPrice";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "timeCreation";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "timeStart";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "timeEnd";
+						type: "uint256";
+					},
+					{
+						internalType: "bool";
+						name: "status";
+						type: "bool";
+					},
+					{
+						components: [
 							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
+								internalType: "address";
+								name: "owner";
+								type: "address";
 							},
 							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
+								internalType: "uint256";
+								name: "value";
+								type: "uint256";
 							}
-						],
-						"internalType": "struct Proffessional.Bet[]",
-						"name": "bets",
-						"type": "tuple[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "status",
-						"type": "bool"
+						];
+						internalType: "struct Profi.Bet[]";
+						name: "bets";
+						type: "tuple[]";
 					}
-				],
-				"internalType": "struct Proffessional.Auction",
-				"name": "",
-				"type": "tuple"
+				];
+				internalType: "struct Profi.Auction[]";
+				name: "";
+				type: "tuple[]";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [],
-		"name": "getAuctions",
-		"outputs": [
+		inputs: [
 			{
-				"components": [
+				internalType: "address";
+				name: "user";
+				type: "address";
+			}
+		];
+		name: "getBalance";
+		outputs: [
+			{
+				internalType: "uint256";
+				name: "";
+				type: "uint256";
+			}
+		];
+		stateMutability: "view";
+		type: "function";
+	},
+	{
+		inputs: [
+			{
+				internalType: "string";
+				name: "name";
+				type: "string";
+			}
+		];
+		name: "getCollection";
+		outputs: [
+			{
+				components: [
 					{
-						"internalType": "uint256",
-						"name": "collectionId",
-						"type": "uint256"
+						internalType: "string";
+						name: "description";
+						type: "string";
 					},
 					{
-						"internalType": "uint256",
-						"name": "startPrice",
-						"type": "uint256"
+						internalType: "bool";
+						name: "isBuyed";
+						type: "bool";
 					},
 					{
-						"internalType": "uint256",
-						"name": "maxPrice",
-						"type": "uint256"
+						internalType: "bool";
+						name: "isOnAuction";
+						type: "bool";
 					},
 					{
-						"internalType": "uint256",
-						"name": "startTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "endTime",
-						"type": "uint256"
-					},
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct Proffessional.Bet[]",
-						"name": "bets",
-						"type": "tuple[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "status",
-						"type": "bool"
+						internalType: "address";
+						name: "owner";
+						type: "address";
 					}
-				],
-				"internalType": "struct Proffessional.Auction[]",
-				"name": "",
-				"type": "tuple[]"
+				];
+				internalType: "struct Profi.NftCollection";
+				name: "";
+				type: "tuple";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [];
+		name: "getNfts";
+		outputs: [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getBalance",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "collectionId",
-				"type": "uint256"
-			}
-		],
-		"name": "getCollection",
-		"outputs": [
-			{
-				"components": [
+				components: [
 					{
-						"internalType": "uint256[]",
-						"name": "nfts",
-						"type": "uint256[]"
+						internalType: "uint256";
+						name: "erc20id";
+						type: "uint256";
 					},
 					{
-						"internalType": "bool",
-						"name": "isBuyed",
-						"type": "bool"
+						internalType: "string";
+						name: "name";
+						type: "string";
 					},
 					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
+						internalType: "string";
+						name: "description";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "pictureURL";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "collection";
+						type: "string";
+					},
+					{
+						internalType: "uint256";
+						name: "price";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "creationDate";
+						type: "uint256";
+					},
+					{
+						internalType: "address";
+						name: "owner";
+						type: "address";
+					},
+					{
+						internalType: "bool";
+						name: "isOnSale";
+						type: "bool";
+					},
+					{
+						internalType: "bool";
+						name: "isSoldFromOwner";
+						type: "bool";
 					}
-				],
-				"internalType": "struct Proffessional.nftCollection",
-				"name": "",
-				"type": "tuple"
+				];
+				internalType: "struct Profi.Nft[]";
+				name: "";
+				type: "tuple[]";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [],
-		"name": "getCollections",
-		"outputs": [
+		inputs: [
 			{
-				"components": [
+				internalType: "address";
+				name: "user";
+				type: "address";
+			}
+		];
+		name: "getUser";
+		outputs: [
+			{
+				components: [
 					{
-						"internalType": "uint256[]",
-						"name": "nfts",
-						"type": "uint256[]"
+						internalType: "enum Profi.Roles";
+						name: "role";
+						type: "uint8";
 					},
 					{
-						"internalType": "bool",
-						"name": "isBuyed",
-						"type": "bool"
+						internalType: "string";
+						name: "login";
+						type: "string";
 					},
 					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
+						internalType: "bytes";
+						name: "refCode";
+						type: "bytes";
+					},
+					{
+						internalType: "uint256";
+						name: "discount";
+						type: "uint256";
+					},
+					{
+						internalType: "bool";
+						name: "isRefCodeUsed";
+						type: "bool";
 					}
-				],
-				"internalType": "struct Proffessional.nftCollection[]",
-				"name": "",
-				"type": "tuple[]"
+				];
+				internalType: "struct Profi.User";
+				name: "";
+				type: "tuple";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [];
+		name: "NFT";
+		outputs: [
 			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
+				internalType: "contract nft";
+				name: "";
+				type: "address";
 			}
-		],
-		"name": "getNft",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "idNFT",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "int256",
-						"name": "collectionId",
-						"type": "int256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Proffessional.nft",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [],
-		"name": "getNfts",
-		"outputs": [
+		inputs: [
 			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "idNFT",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "int256",
-						"name": "collectionId",
-						"type": "int256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Proffessional.nft[]",
-				"name": "",
-				"type": "tuple[]"
+				internalType: "string";
+				name: "";
+				type: "string";
 			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
+		];
+		name: "nftCollections";
+		outputs: [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getUser",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "login",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "role",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "discount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bytes",
-						"name": "refCode",
-						"type": "bytes"
-					},
-					{
-						"internalType": "bool",
-						"name": "refCodeUsed",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Proffessional.User",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
+				internalType: "string";
+				name: "description";
+				type: "string";
 			},
 			{
-				"internalType": "uint256",
-				"name": "increaseValue",
-				"type": "uint256"
+				internalType: "bool";
+				name: "isBuyed";
+				type: "bool";
+			},
+			{
+				internalType: "bool";
+				name: "isOnAuction";
+				type: "bool";
+			},
+			{
+				internalType: "address";
+				name: "owner";
+				type: "address";
 			}
-		],
-		"name": "increateBet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				internalType: "uint256";
+				name: "";
+				type: "uint256";
 			}
-		],
-		"name": "mintCollection",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "nfts";
+		outputs: [
+			{
+				internalType: "uint256";
+				name: "erc20id";
+				type: "uint256";
+			},
+			{
+				internalType: "string";
+				name: "name";
+				type: "string";
+			},
+			{
+				internalType: "string";
+				name: "description";
+				type: "string";
+			},
+			{
+				internalType: "string";
+				name: "pictureURL";
+				type: "string";
+			},
+			{
+				internalType: "string";
+				name: "collection";
+				type: "string";
+			},
+			{
+				internalType: "uint256";
+				name: "price";
+				type: "uint256";
+			},
+			{
+				internalType: "uint256";
+				name: "creationDate";
+				type: "uint256";
+			},
+			{
+				internalType: "address";
+				name: "owner";
+				type: "address";
+			},
+			{
+				internalType: "bool";
+				name: "isOnSale";
+				type: "bool";
+			},
+			{
+				internalType: "bool";
+				name: "isSoldFromOwner";
+				type: "bool";
+			}
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
+				internalType: "bytes";
+				name: "";
+				type: "bytes";
 			}
-		],
-		"name": "mintSingle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		name: "refCodes";
+		outputs: [
+			{
+				internalType: "address";
+				name: "";
+				type: "address";
+			}
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [];
+		name: "TOKEN";
+		outputs: [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				internalType: "contract token";
+				name: "";
+				type: "address";
 			}
-		],
-		"name": "nfts",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "idNFT",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "int256",
-				"name": "collectionId",
-				"type": "int256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "onSale",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [];
+		name: "totalSupply";
+		outputs: [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "login",
-				"type": "string"
+				internalType: "uint256";
+				name: "";
+				type: "uint256";
 			}
-		],
-		"name": "registration",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
+				internalType: "address";
+				name: "";
+				type: "address";
+			}
+		];
+		name: "users";
+		outputs: [
+			{
+				internalType: "enum Profi.Roles";
+				name: "role";
+				type: "uint8";
 			},
 			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"name": "sellNft",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
+				internalType: "string";
+				name: "login";
+				type: "string";
 			},
 			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
+				internalType: "bytes";
+				name: "refCode";
+				type: "bytes";
+			},
+			{
+				internalType: "uint256";
+				name: "discount";
+				type: "uint256";
+			},
+			{
+				internalType: "bool";
+				name: "isRefCodeUsed";
+				type: "bool";
 			}
-		],
-		"name": "sendNft",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		];
+		stateMutability: "view";
+		type: "function";
 	}
-]
+];
 
 export const abi = [
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		inputs: [
+			{
+				internalType: "uint256[]",
+				name: "ids",
+				type: "uint256[]",
+			},
+			{
+				internalType: "string",
+				name: "collectionName",
+				type: "string",
+			},
+		],
+		name: "addNftsToCollection",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
 	},
 	{
-		"inputs": [],
-		"name": "NFT",
-		"outputs": [
+		inputs: [
 			{
-				"internalType": "contract Nft",
-				"name": "",
-				"type": "address"
-			}
+				internalType: "bytes",
+				name: "refCode",
+				type: "bytes",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		name: "applyRefCode",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
 	},
 	{
-		"inputs": [],
-		"name": "TOKEN",
-		"outputs": [
+		inputs: [
 			{
-				"internalType": "contract Token",
-				"name": "",
-				"type": "address"
-			}
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		name: "buyNft",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "bytes",
-				"name": "refCode",
-				"type": "bytes"
-			}
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
 		],
-		"name": "applyReferalCode",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "cancelSellNft",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "auctions",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "collectionId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "startPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "maxPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "startTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "endTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "status",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		inputs: [],
+		stateMutability: "nonpayable",
+		type: "constructor",
 	},
 	{
-		"inputs": [
+		anonymous: false,
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
+				indexed: true,
+				internalType: "address",
+				name: "_from",
+				type: "address",
 			},
 			{
-				"internalType": "uint256",
-				"name": "betPrice",
-				"type": "uint256"
-			}
+				indexed: true,
+				internalType: "address",
+				name: "_sellerAddress",
+				type: "address",
+			},
+			{
+				indexed: false,
+				internalType: "uint256",
+				name: "nftId",
+				type: "uint256",
+			},
 		],
-		"name": "bet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "buyNftEvent",
+		type: "event",
 	},
 	{
-		"inputs": [
+		anonymous: false,
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
-			}
+				indexed: true,
+				internalType: "address",
+				name: "_from",
+				type: "address",
+			},
+			{
+				indexed: false,
+				internalType: "uint256",
+				name: "nftId",
+				type: "uint256",
+			},
 		],
-		"name": "buyNft",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "cancelSellNftEvent",
+		type: "event",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "collections",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "isBuyed",
-				"type": "bool"
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
 			},
 			{
-				"internalType": "bool",
-				"name": "onSale",
-				"type": "bool"
-			}
+				internalType: "uint256",
+				name: "newPrice",
+				type: "uint256",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		name: "changeNftPrice",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
 	},
 	{
-		"inputs": [
+		anonymous: false,
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "collectionId",
-				"type": "uint256"
+				indexed: true,
+				internalType: "address",
+				name: "_from",
+				type: "address",
 			},
 			{
-				"internalType": "uint256",
-				"name": "startPrice",
-				"type": "uint256"
+				indexed: false,
+				internalType: "uint256",
+				name: "nftId",
+				type: "uint256",
 			},
 			{
-				"internalType": "uint256",
-				"name": "maxPrice",
-				"type": "uint256"
+				indexed: false,
+				internalType: "uint256",
+				name: "newPrice",
+				type: "uint256",
 			},
-			{
-				"internalType": "uint256",
-				"name": "startTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "endTime",
-				"type": "uint256"
-			}
 		],
-		"name": "createAuction",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "changePriceNftEvent",
+		type: "event",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
-			}
+				internalType: "string",
+				name: "collection",
+				type: "string",
+			},
+			{
+				internalType: "uint256",
+				name: "timeStart",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "timeEnd",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "startPrice",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "maxPrice",
+				type: "uint256",
+			},
 		],
-		"name": "endAuction",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "createAuction",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
-			}
+				internalType: "string",
+				name: "name",
+				type: "string",
+			},
+			{
+				internalType: "string",
+				name: "description",
+				type: "string",
+			},
 		],
-		"name": "getAuction",
-		"outputs": [
+		name: "createCollection",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		anonymous: false,
+		inputs: [
 			{
-				"components": [
+				indexed: true,
+				internalType: "address",
+				name: "_from",
+				type: "address",
+			},
+			{
+				components: [
 					{
-						"internalType": "uint256",
-						"name": "collectionId",
-						"type": "uint256"
+						internalType: "uint256",
+						name: "erc20id",
+						type: "uint256",
 					},
 					{
-						"internalType": "uint256",
-						"name": "startPrice",
-						"type": "uint256"
+						internalType: "string",
+						name: "name",
+						type: "string",
 					},
 					{
-						"internalType": "uint256",
-						"name": "maxPrice",
-						"type": "uint256"
+						internalType: "string",
+						name: "description",
+						type: "string",
 					},
 					{
-						"internalType": "uint256",
-						"name": "startTime",
-						"type": "uint256"
+						internalType: "string",
+						name: "pictureURL",
+						type: "string",
 					},
 					{
-						"internalType": "uint256",
-						"name": "endTime",
-						"type": "uint256"
+						internalType: "string",
+						name: "collection",
+						type: "string",
 					},
 					{
-						"components": [
+						internalType: "uint256",
+						name: "price",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "creationDate",
+						type: "uint256",
+					},
+					{
+						internalType: "address",
+						name: "owner",
+						type: "address",
+					},
+					{
+						internalType: "bool",
+						name: "isOnSale",
+						type: "bool",
+					},
+					{
+						internalType: "bool",
+						name: "isSoldFromOwner",
+						type: "bool",
+					},
+				],
+				indexed: false,
+				internalType: "struct Profi.Nft",
+				name: "nft",
+				type: "tuple",
+			},
+		],
+		name: "createNftEvent",
+		type: "event",
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
+		],
+		name: "endAuction",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
+			{
+				internalType: "address",
+				name: "user",
+				type: "address",
+			},
+		],
+		name: "giftNft",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "increaseValue",
+				type: "uint256",
+			},
+		],
+		name: "increaseBet",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "bet",
+				type: "uint256",
+			},
+		],
+		name: "makeBet",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: true,
+				internalType: "address",
+				name: "_from",
+				type: "address",
+			},
+			{
+				indexed: false,
+				internalType: "uint256",
+				name: "nftId",
+				type: "uint256",
+			},
+		],
+		name: "makeSellNftEvent",
+		type: "event",
+	},
+	{
+		inputs: [
+			{
+				internalType: "string",
+				name: "name",
+				type: "string",
+			},
+			{
+				internalType: "string",
+				name: "description",
+				type: "string",
+			},
+			{
+				internalType: "string",
+				name: "pictureURL",
+				type: "string",
+			},
+		],
+		name: "mintNft",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "address",
+				name: "user",
+				type: "address",
+			},
+			{
+				internalType: "string",
+				name: "login",
+				type: "string",
+			},
+		],
+		name: "registration",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "id",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "price",
+				type: "uint256",
+			},
+		],
+		name: "sellNft",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "",
+				type: "uint256",
+			},
+		],
+		name: "auctions",
+		outputs: [
+			{
+				internalType: "string",
+				name: "collection",
+				type: "string",
+			},
+			{
+				internalType: "uint256",
+				name: "startPrice",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "maxPrice",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "timeCreation",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "timeStart",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "timeEnd",
+				type: "uint256",
+			},
+			{
+				internalType: "bool",
+				name: "status",
+				type: "bool",
+			},
+		],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "getAuctions",
+		outputs: [
+			{
+				components: [
+					{
+						internalType: "string",
+						name: "collection",
+						type: "string",
+					},
+					{
+						internalType: "uint256",
+						name: "startPrice",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "maxPrice",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "timeCreation",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "timeStart",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "timeEnd",
+						type: "uint256",
+					},
+					{
+						internalType: "bool",
+						name: "status",
+						type: "bool",
+					},
+					{
+						components: [
 							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
+								internalType: "address",
+								name: "owner",
+								type: "address",
 							},
 							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct Proffessional.Bet[]",
-						"name": "bets",
-						"type": "tuple[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "status",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Proffessional.Auction",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getAuctions",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "collectionId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "startPrice",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "maxPrice",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "startTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "endTime",
-						"type": "uint256"
-					},
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "owner",
-								"type": "address"
+								internalType: "uint256",
+								name: "value",
+								type: "uint256",
 							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							}
 						],
-						"internalType": "struct Proffessional.Bet[]",
-						"name": "bets",
-						"type": "tuple[]"
+						internalType: "struct Profi.Bet[]",
+						name: "bets",
+						type: "tuple[]",
 					},
-					{
-						"internalType": "bool",
-						"name": "status",
-						"type": "bool"
-					}
 				],
-				"internalType": "struct Proffessional.Auction[]",
-				"name": "",
-				"type": "tuple[]"
-			}
+				internalType: "struct Profi.Auction[]",
+				name: "",
+				type: "tuple[]",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
+				internalType: "address",
+				name: "user",
+				type: "address",
+			},
 		],
-		"name": "getBalance",
-		"outputs": [
+		name: "getBalance",
+		outputs: [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
+				internalType: "uint256",
+				name: "",
+				type: "uint256",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "collectionId",
-				"type": "uint256"
-			}
+				internalType: "string",
+				name: "name",
+				type: "string",
+			},
 		],
-		"name": "getCollection",
-		"outputs": [
+		name: "getCollection",
+		outputs: [
 			{
-				"components": [
+				components: [
 					{
-						"internalType": "uint256[]",
-						"name": "nfts",
-						"type": "uint256[]"
+						internalType: "string",
+						name: "description",
+						type: "string",
 					},
 					{
-						"internalType": "bool",
-						"name": "isBuyed",
-						"type": "bool"
+						internalType: "bool",
+						name: "isBuyed",
+						type: "bool",
 					},
 					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
-					}
+						internalType: "bool",
+						name: "isOnAuction",
+						type: "bool",
+					},
+					{
+						internalType: "address",
+						name: "owner",
+						type: "address",
+					},
 				],
-				"internalType": "struct Proffessional.nftCollection",
-				"name": "",
-				"type": "tuple"
-			}
+				internalType: "struct Profi.NftCollection",
+				name: "",
+				type: "tuple",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [],
-		"name": "getCollections",
-		"outputs": [
+		inputs: [],
+		name: "getNfts",
+		outputs: [
 			{
-				"components": [
+				components: [
 					{
-						"internalType": "uint256[]",
-						"name": "nfts",
-						"type": "uint256[]"
+						internalType: "uint256",
+						name: "erc20id",
+						type: "uint256",
 					},
 					{
-						"internalType": "bool",
-						"name": "isBuyed",
-						"type": "bool"
+						internalType: "string",
+						name: "name",
+						type: "string",
 					},
 					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
-					}
+						internalType: "string",
+						name: "description",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "pictureURL",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "collection",
+						type: "string",
+					},
+					{
+						internalType: "uint256",
+						name: "price",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "creationDate",
+						type: "uint256",
+					},
+					{
+						internalType: "address",
+						name: "owner",
+						type: "address",
+					},
+					{
+						internalType: "bool",
+						name: "isOnSale",
+						type: "bool",
+					},
+					{
+						internalType: "bool",
+						name: "isSoldFromOwner",
+						type: "bool",
+					},
 				],
-				"internalType": "struct Proffessional.nftCollection[]",
-				"name": "",
-				"type": "tuple[]"
-			}
+				internalType: "struct Profi.Nft[]",
+				name: "",
+				type: "tuple[]",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
-			}
+				internalType: "address",
+				name: "user",
+				type: "address",
+			},
 		],
-		"name": "getNft",
-		"outputs": [
+		name: "getUser",
+		outputs: [
 			{
-				"components": [
+				components: [
 					{
-						"internalType": "uint256",
-						"name": "idNFT",
-						"type": "uint256"
+						internalType: "enum Profi.Roles",
+						name: "role",
+						type: "uint8",
 					},
 					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
+						internalType: "string",
+						name: "login",
+						type: "string",
 					},
 					{
-						"internalType": "int256",
-						"name": "collectionId",
-						"type": "int256"
+						internalType: "bytes",
+						name: "refCode",
+						type: "bytes",
 					},
 					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
+						internalType: "uint256",
+						name: "discount",
+						type: "uint256",
 					},
 					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
-					}
+						internalType: "bool",
+						name: "isRefCodeUsed",
+						type: "bool",
+					},
 				],
-				"internalType": "struct Proffessional.nft",
-				"name": "",
-				"type": "tuple"
-			}
+				internalType: "struct Profi.User",
+				name: "",
+				type: "tuple",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [],
-		"name": "getNfts",
-		"outputs": [
+		inputs: [],
+		name: "NFT",
+		outputs: [
 			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "idNFT",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "int256",
-						"name": "collectionId",
-						"type": "int256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "onSale",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Proffessional.nft[]",
-				"name": "",
-				"type": "tuple[]"
-			}
+				internalType: "contract nft",
+				name: "",
+				type: "address",
+			},
 		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
+				internalType: "string",
+				name: "",
+				type: "string",
+			},
 		],
-		"name": "getUser",
-		"outputs": [
+		name: "nftCollections",
+		outputs: [
 			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "login",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "role",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "discount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bytes",
-						"name": "refCode",
-						"type": "bytes"
-					},
-					{
-						"internalType": "bool",
-						"name": "refCodeUsed",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Proffessional.User",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "auctionId",
-				"type": "uint256"
+				internalType: "string",
+				name: "description",
+				type: "string",
 			},
 			{
-				"internalType": "uint256",
-				"name": "increaseValue",
-				"type": "uint256"
-			}
+				internalType: "bool",
+				name: "isBuyed",
+				type: "bool",
+			},
+			{
+				internalType: "bool",
+				name: "isOnAuction",
+				type: "bool",
+			},
+			{
+				internalType: "address",
+				name: "owner",
+				type: "address",
+			},
 		],
-		"name": "increateBet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
+				internalType: "uint256",
+				name: "",
+				type: "uint256",
+			},
 		],
-		"name": "mintCollection",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "nfts",
+		outputs: [
+			{
+				internalType: "uint256",
+				name: "erc20id",
+				type: "uint256",
+			},
+			{
+				internalType: "string",
+				name: "name",
+				type: "string",
+			},
+			{
+				internalType: "string",
+				name: "description",
+				type: "string",
+			},
+			{
+				internalType: "string",
+				name: "pictureURL",
+				type: "string",
+			},
+			{
+				internalType: "string",
+				name: "collection",
+				type: "string",
+			},
+			{
+				internalType: "uint256",
+				name: "price",
+				type: "uint256",
+			},
+			{
+				internalType: "uint256",
+				name: "creationDate",
+				type: "uint256",
+			},
+			{
+				internalType: "address",
+				name: "owner",
+				type: "address",
+			},
+			{
+				internalType: "bool",
+				name: "isOnSale",
+				type: "bool",
+			},
+			{
+				internalType: "bool",
+				name: "isSoldFromOwner",
+				type: "bool",
+			},
+		],
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
+				internalType: "bytes",
+				name: "",
+				type: "bytes",
+			},
 		],
-		"name": "mintSingle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		name: "refCodes",
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [],
+		name: "TOKEN",
+		outputs: [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
+				internalType: "contract token",
+				name: "",
+				type: "address",
+			},
 		],
-		"name": "nfts",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "idNFT",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "int256",
-				"name": "collectionId",
-				"type": "int256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "onSale",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [],
+		name: "totalSupply",
+		outputs: [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
+				internalType: "uint256",
+				name: "",
+				type: "uint256",
 			},
-			{
-				"internalType": "string",
-				"name": "login",
-				"type": "string"
-			}
 		],
-		"name": "registration",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
 	{
-		"inputs": [
+		inputs: [
 			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
+		name: "users",
+		outputs: [
+			{
+				internalType: "enum Profi.Roles",
+				name: "role",
+				type: "uint8",
 			},
 			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
+				internalType: "string",
+				name: "login",
+				type: "string",
+			},
+			{
+				internalType: "bytes",
+				name: "refCode",
+				type: "bytes",
+			},
+			{
+				internalType: "uint256",
+				name: "discount",
+				type: "uint256",
+			},
+			{
+				internalType: "bool",
+				name: "isRefCodeUsed",
+				type: "bool",
+			},
 		],
-		"name": "sellNft",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		stateMutability: "view",
+		type: "function",
 	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "nftId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			}
-		],
-		"name": "sendNft",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-]
+];

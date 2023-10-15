@@ -1,10 +1,10 @@
 export interface IUser {
 	address: string;
+	role: MatchPrimitiveType<"uint8", number>;
 	login: string;
-    role: MatchPrimitiveType<"uint256", bigint>;
-    discount: MatchPrimitiveType<"uint256", bigint>;
-    refCode: MatchPrimitiveType<"bytes", string>;
-    refCodeUsed: MatchPrimitiveType<"uint256", boolean>;
+	refCode: MatchPrimitiveType<"bytes", string>;
+	discount: MatchPrimitiveType<"uint256", number>;
+	isRefCodeUsed: MatchPrimitiveType<boolean>;
 }
 
 export type UserContextType = {

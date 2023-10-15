@@ -2,24 +2,6 @@ export type abiType = [
 	{
 		inputs: [
 			{
-				internalType: "uint256[]";
-				name: "ids";
-				type: "uint256[]";
-			},
-			{
-				internalType: "string";
-				name: "collectionName";
-				type: "string";
-			}
-		];
-		name: "addNftsToCollection";
-		outputs: [];
-		stateMutability: "nonpayable";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
 				internalType: "bytes";
 				name: "refCode";
 				type: "bytes";
@@ -149,57 +131,6 @@ export type abiType = [
 		type: "event";
 	},
 	{
-		inputs: [
-			{
-				internalType: "string";
-				name: "collection";
-				type: "string";
-			},
-			{
-				internalType: "uint256";
-				name: "timeStart";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "timeEnd";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "startPrice";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "maxPrice";
-				type: "uint256";
-			}
-		];
-		name: "createAuction";
-		outputs: [];
-		stateMutability: "nonpayable";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
-				internalType: "string";
-				name: "name";
-				type: "string";
-			},
-			{
-				internalType: "string";
-				name: "description";
-				type: "string";
-			}
-		];
-		name: "createCollection";
-		outputs: [];
-		stateMutability: "nonpayable";
-		type: "function";
-	},
-	{
 		anonymous: false;
 		inputs: [
 			{
@@ -210,6 +141,11 @@ export type abiType = [
 			},
 			{
 				components: [
+					{
+						internalType: "uint256";
+						name: "arrayIndex";
+						type: "uint256";
+					},
 					{
 						internalType: "uint256";
 						name: "erc20id";
@@ -276,19 +212,6 @@ export type abiType = [
 				internalType: "uint256";
 				name: "id";
 				type: "uint256";
-			}
-		];
-		name: "endAuction";
-		outputs: [];
-		stateMutability: "nonpayable";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256";
-				name: "id";
-				type: "uint256";
 			},
 			{
 				internalType: "address";
@@ -297,42 +220,6 @@ export type abiType = [
 			}
 		];
 		name: "giftNft";
-		outputs: [];
-		stateMutability: "nonpayable";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256";
-				name: "id";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "increaseValue";
-				type: "uint256";
-			}
-		];
-		name: "increaseBet";
-		outputs: [];
-		stateMutability: "nonpayable";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256";
-				name: "id";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "bet";
-				type: "uint256";
-			}
-		];
-		name: "makeBet";
 		outputs: [];
 		stateMutability: "nonpayable";
 		type: "function";
@@ -418,122 +305,6 @@ export type abiType = [
 	{
 		inputs: [
 			{
-				internalType: "uint256";
-				name: "";
-				type: "uint256";
-			}
-		];
-		name: "auctions";
-		outputs: [
-			{
-				internalType: "string";
-				name: "collection";
-				type: "string";
-			},
-			{
-				internalType: "uint256";
-				name: "startPrice";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "maxPrice";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "timeCreation";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "timeStart";
-				type: "uint256";
-			},
-			{
-				internalType: "uint256";
-				name: "timeEnd";
-				type: "uint256";
-			},
-			{
-				internalType: "bool";
-				name: "status";
-				type: "bool";
-			}
-		];
-		stateMutability: "view";
-		type: "function";
-	},
-	{
-		inputs: [];
-		name: "getAuctions";
-		outputs: [
-			{
-				components: [
-					{
-						internalType: "string";
-						name: "collection";
-						type: "string";
-					},
-					{
-						internalType: "uint256";
-						name: "startPrice";
-						type: "uint256";
-					},
-					{
-						internalType: "uint256";
-						name: "maxPrice";
-						type: "uint256";
-					},
-					{
-						internalType: "uint256";
-						name: "timeCreation";
-						type: "uint256";
-					},
-					{
-						internalType: "uint256";
-						name: "timeStart";
-						type: "uint256";
-					},
-					{
-						internalType: "uint256";
-						name: "timeEnd";
-						type: "uint256";
-					},
-					{
-						internalType: "bool";
-						name: "status";
-						type: "bool";
-					},
-					{
-						components: [
-							{
-								internalType: "address";
-								name: "owner";
-								type: "address";
-							},
-							{
-								internalType: "uint256";
-								name: "value";
-								type: "uint256";
-							}
-						];
-						internalType: "struct Profi.Bet[]";
-						name: "bets";
-						type: "tuple[]";
-					}
-				];
-				internalType: "struct Profi.Auction[]";
-				name: "";
-				type: "tuple[]";
-			}
-		];
-		stateMutability: "view";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
 				internalType: "address";
 				name: "user";
 				type: "address";
@@ -551,52 +322,16 @@ export type abiType = [
 		type: "function";
 	},
 	{
-		inputs: [
-			{
-				internalType: "string";
-				name: "name";
-				type: "string";
-			}
-		];
-		name: "getCollection";
-		outputs: [
-			{
-				components: [
-					{
-						internalType: "string";
-						name: "description";
-						type: "string";
-					},
-					{
-						internalType: "bool";
-						name: "isBuyed";
-						type: "bool";
-					},
-					{
-						internalType: "bool";
-						name: "isOnAuction";
-						type: "bool";
-					},
-					{
-						internalType: "address";
-						name: "owner";
-						type: "address";
-					}
-				];
-				internalType: "struct Profi.NftCollection";
-				name: "";
-				type: "tuple";
-			}
-		];
-		stateMutability: "view";
-		type: "function";
-	},
-	{
 		inputs: [];
 		name: "getNfts";
 		outputs: [
 			{
 				components: [
+					{
+						internalType: "uint256";
+						name: "arrayIndex";
+						type: "uint256";
+					},
 					{
 						internalType: "uint256";
 						name: "erc20id";
@@ -718,40 +453,6 @@ export type abiType = [
 	{
 		inputs: [
 			{
-				internalType: "string";
-				name: "";
-				type: "string";
-			}
-		];
-		name: "nftCollections";
-		outputs: [
-			{
-				internalType: "string";
-				name: "description";
-				type: "string";
-			},
-			{
-				internalType: "bool";
-				name: "isBuyed";
-				type: "bool";
-			},
-			{
-				internalType: "bool";
-				name: "isOnAuction";
-				type: "bool";
-			},
-			{
-				internalType: "address";
-				name: "owner";
-				type: "address";
-			}
-		];
-		stateMutability: "view";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
 				internalType: "uint256";
 				name: "";
 				type: "uint256";
@@ -759,6 +460,11 @@ export type abiType = [
 		];
 		name: "nfts";
 		outputs: [
+			{
+				internalType: "uint256";
+				name: "arrayIndex";
+				type: "uint256";
+			},
 			{
 				internalType: "uint256";
 				name: "erc20id";
@@ -903,24 +609,6 @@ export const abi = [
 	{
 		inputs: [
 			{
-				internalType: "uint256[]",
-				name: "ids",
-				type: "uint256[]",
-			},
-			{
-				internalType: "string",
-				name: "collectionName",
-				type: "string",
-			},
-		],
-		name: "addNftsToCollection",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
 				internalType: "bytes",
 				name: "refCode",
 				type: "bytes",
@@ -1050,57 +738,6 @@ export const abi = [
 		type: "event",
 	},
 	{
-		inputs: [
-			{
-				internalType: "string",
-				name: "collection",
-				type: "string",
-			},
-			{
-				internalType: "uint256",
-				name: "timeStart",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "timeEnd",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "startPrice",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "maxPrice",
-				type: "uint256",
-			},
-		],
-		name: "createAuction",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "string",
-				name: "name",
-				type: "string",
-			},
-			{
-				internalType: "string",
-				name: "description",
-				type: "string",
-			},
-		],
-		name: "createCollection",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
 		anonymous: false,
 		inputs: [
 			{
@@ -1111,6 +748,11 @@ export const abi = [
 			},
 			{
 				components: [
+					{
+						internalType: "uint256",
+						name: "arrayIndex",
+						type: "uint256",
+					},
 					{
 						internalType: "uint256",
 						name: "erc20id",
@@ -1178,19 +820,6 @@ export const abi = [
 				name: "id",
 				type: "uint256",
 			},
-		],
-		name: "endAuction",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256",
-				name: "id",
-				type: "uint256",
-			},
 			{
 				internalType: "address",
 				name: "user",
@@ -1198,42 +827,6 @@ export const abi = [
 			},
 		],
 		name: "giftNft",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256",
-				name: "id",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "increaseValue",
-				type: "uint256",
-			},
-		],
-		name: "increaseBet",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256",
-				name: "id",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "bet",
-				type: "uint256",
-			},
-		],
-		name: "makeBet",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
@@ -1319,122 +912,6 @@ export const abi = [
 	{
 		inputs: [
 			{
-				internalType: "uint256",
-				name: "",
-				type: "uint256",
-			},
-		],
-		name: "auctions",
-		outputs: [
-			{
-				internalType: "string",
-				name: "collection",
-				type: "string",
-			},
-			{
-				internalType: "uint256",
-				name: "startPrice",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "maxPrice",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "timeCreation",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "timeStart",
-				type: "uint256",
-			},
-			{
-				internalType: "uint256",
-				name: "timeEnd",
-				type: "uint256",
-			},
-			{
-				internalType: "bool",
-				name: "status",
-				type: "bool",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [],
-		name: "getAuctions",
-		outputs: [
-			{
-				components: [
-					{
-						internalType: "string",
-						name: "collection",
-						type: "string",
-					},
-					{
-						internalType: "uint256",
-						name: "startPrice",
-						type: "uint256",
-					},
-					{
-						internalType: "uint256",
-						name: "maxPrice",
-						type: "uint256",
-					},
-					{
-						internalType: "uint256",
-						name: "timeCreation",
-						type: "uint256",
-					},
-					{
-						internalType: "uint256",
-						name: "timeStart",
-						type: "uint256",
-					},
-					{
-						internalType: "uint256",
-						name: "timeEnd",
-						type: "uint256",
-					},
-					{
-						internalType: "bool",
-						name: "status",
-						type: "bool",
-					},
-					{
-						components: [
-							{
-								internalType: "address",
-								name: "owner",
-								type: "address",
-							},
-							{
-								internalType: "uint256",
-								name: "value",
-								type: "uint256",
-							},
-						],
-						internalType: "struct Profi.Bet[]",
-						name: "bets",
-						type: "tuple[]",
-					},
-				],
-				internalType: "struct Profi.Auction[]",
-				name: "",
-				type: "tuple[]",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
 				internalType: "address",
 				name: "user",
 				type: "address",
@@ -1452,52 +929,16 @@ export const abi = [
 		type: "function",
 	},
 	{
-		inputs: [
-			{
-				internalType: "string",
-				name: "name",
-				type: "string",
-			},
-		],
-		name: "getCollection",
-		outputs: [
-			{
-				components: [
-					{
-						internalType: "string",
-						name: "description",
-						type: "string",
-					},
-					{
-						internalType: "bool",
-						name: "isBuyed",
-						type: "bool",
-					},
-					{
-						internalType: "bool",
-						name: "isOnAuction",
-						type: "bool",
-					},
-					{
-						internalType: "address",
-						name: "owner",
-						type: "address",
-					},
-				],
-				internalType: "struct Profi.NftCollection",
-				name: "",
-				type: "tuple",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
 		inputs: [],
 		name: "getNfts",
 		outputs: [
 			{
 				components: [
+					{
+						internalType: "uint256",
+						name: "arrayIndex",
+						type: "uint256",
+					},
 					{
 						internalType: "uint256",
 						name: "erc20id",
@@ -1619,40 +1060,6 @@ export const abi = [
 	{
 		inputs: [
 			{
-				internalType: "string",
-				name: "",
-				type: "string",
-			},
-		],
-		name: "nftCollections",
-		outputs: [
-			{
-				internalType: "string",
-				name: "description",
-				type: "string",
-			},
-			{
-				internalType: "bool",
-				name: "isBuyed",
-				type: "bool",
-			},
-			{
-				internalType: "bool",
-				name: "isOnAuction",
-				type: "bool",
-			},
-			{
-				internalType: "address",
-				name: "owner",
-				type: "address",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
 				internalType: "uint256",
 				name: "",
 				type: "uint256",
@@ -1660,6 +1067,11 @@ export const abi = [
 		],
 		name: "nfts",
 		outputs: [
+			{
+				internalType: "uint256",
+				name: "arrayIndex",
+				type: "uint256",
+			},
 			{
 				internalType: "uint256",
 				name: "erc20id",

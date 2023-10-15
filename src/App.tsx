@@ -46,7 +46,7 @@ function App() {
 					<Route path="/error" element={<ErrorPage errorCode={403} errorMessage={"У вас нет расширения METAMASK"} />} />
 				</Routes>
 			</AuthProvider>
-			<ToastContainer />
+			<ToastContainer position="bottom-right" autoClose={1500} hideProgressBar closeOnClick draggable theme={"dark"} />
 		</div>
 	);
 }

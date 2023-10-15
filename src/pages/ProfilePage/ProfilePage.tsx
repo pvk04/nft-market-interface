@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import getUser from "services/getUser";
 
 function ProfilePage() {
-	const { user, signin } = useAuth();	
+	const { user, signin } = useAuth();
 	const [refValue, setRefValue] = useState("");
 	const [refCodePending, setRefCodePending] = useState(false);
 
@@ -19,13 +19,6 @@ function ProfilePage() {
 		await navigator.clipboard.writeText(`PROFI-${user.address.slice(2, 6)}2023`);
 		toast.success("Реферальный код успешно скопирован", {
 			position: "top-right",
-			autoClose: 1500,
-			hideProgressBar: true,
-			closeOnClick: true,
-			pauseOnHover: false,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
 		});
 	}
 
@@ -41,7 +34,7 @@ function ProfilePage() {
 			toast.promise(
 				createTransaction(
 					user.address,
-					"applyReferalCode",
+					"applyRefCode",
 					[resultCode],
 					async () => {
 						const userRefreshed = await getUser(user.address);

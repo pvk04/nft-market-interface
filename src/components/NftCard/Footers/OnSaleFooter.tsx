@@ -15,7 +15,7 @@ function OnSaleFooter({
 	const [editPrice, setEditPrice] = useState(false);
 
 	function handleChangePrice() {
-		changePrice(BigInt(newPrice), () => {
+		changePrice(newPrice, () => {
 			setEditPrice(false);
 		});
 	}
@@ -53,7 +53,7 @@ function OnSaleFooter({
 					</>
 				)}
 			</InputGroup>
-			<Button>Снять с продажи</Button>
+			<Button onClick={cancelSale}>Снять с продажи</Button>
 		</>
 	);
 }

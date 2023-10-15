@@ -1,69 +1,24 @@
 import { useEffect, useState } from "react";
-import { Card, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import styles from "./NftPage.module.css";
 import { confirmDialog } from "components/ConfirmDialog/ConfirmDialog";
 import NftCard from "components/NftCard/NftCard";
-import { contract } from "config/connection";
-
-const myNFTs = [
-	{
-		name: "nft 1",
-		description: "test tes testests",
-		img: "http://localhost:4000/file/f00b6091-a50f-46fd-bdcb-1b937ffd7a22.webp",
-		isOnSale: false,
-		price: "12",
-	},
-	{
-		name: "nft 2",
-		description: "lorem ipsum madand doah daoshdas",
-		img: "http://localhost:4000/file/f30c6d3e-0285-421b-848c-e8d8e6f8d705.webp",
-		isOnSale: false,
-		price: "22",
-	},
-	{
-		name: "nft 3",
-		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
-		img: "/images/examplenft.jpg",
-		isOnSale: false,
-		price: "33",
-	},
-	{
-		name: "nft 3",
-		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
-		img: "/images/examplenft.jpg",
-		isOnSale: false,
-		price: "43",
-	},
-	{
-		name: "nft 3",
-		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
-		img: "/images/examplenft.jpg",
-		isOnSale: false,
-		price: "32",
-	},
-	{
-		name: "nft 3",
-		description: "dashdh dasasdsd as ds  as  vd sv wev wvevwvewvew vwv ev ewv v",
-		img: "/images/examplenft.jpg",
-		isOnSale: false,
-		price: "23",
-	},
-];
+import { useAuth } from "hook/useAuth";
+import { toast } from "react-toastify";
+import createTransaction from "services/createTransaction";
+import getNfts from "services/getNfts";
 
 function NftPage() {
+	const { user } = useAuth();
 	const [nfts, setNfts] = useState<INft[] | []>([]);
 	const [isConfirmation, setIsConfirmation] = useState(false);
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
 
 	useEffect(() => {
-		contract.methods
-			.getNfts()
-			.call()
-			.then((result) => {
-				console.log(result);
-				setNfts(result);
-			});
-	}, []);
+		getNfts(user.address, true).then((nfts) => {
+			setNfts(nfts);
+		});
+	}, [user.address]);
 
 	function handleChangeNft(changedNft: INft, index: number) {
 		const newNftArr: INft[] = [...nfts];
@@ -95,6 +50,25 @@ function NftPage() {
 				console.log("close");
 			},
 			handleConfirm: () => {
+				toast.promise(
+					createTransaction(
+						user.address,
+						"sellNft",
+						[nft.arrayIndex, nft.price],
+						async () => {
+							getNfts(user.address, true).then((nfts) => {
+								setNfts(nfts);
+							});
+						},
+						null,
+						null
+					),
+					{
+						pending: "Проверяем реферальный код",
+						success: "Реферальный код применен",
+						error: "Ошибка. Проверьте правильность введенного кода",
+					}
+				);
 				console.log("confirm");
 			},
 		});
@@ -136,7 +110,7 @@ function NftPage() {
 
 			{nfts.map((nft, index) => (
 				<Col xs={12} sm={6} md={3} style={{ marginBottom: "15px" }} key={index}>
-					<NftCard index={index} nft={{...nft}} changeNft={handleChangeNft} />
+					<NftCard index={index} nft={{ ...nft }} changeNft={handleChangeNft} />
 				</Col>
 			))}
 		</Row>

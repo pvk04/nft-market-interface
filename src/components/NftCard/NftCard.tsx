@@ -1,40 +1,46 @@
-import { useState } from "react";
 import { Card, Form } from "react-bootstrap";
 import { confirmDialog } from "components/ConfirmDialog/ConfirmDialog";
 import SaleFooter from "./Footers/SaleFooter";
 import OnSaleFooter from "./Footers/OnSaleFooter";
+import createTransaction from "services/createTransaction";
 import { toast } from "react-toastify";
+import { useAuth } from "hook/useAuth";
+import BigNumber from "bignumber.js";
 
 function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNft: (cangedNft: INft, index: number) => void }) {
+	const { user } = useAuth();
+
 	async function sellNft(price: string | number) {
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите выставить на продажу?",
-			handleClose: () => {
-				console.log("close");
-			},
-			handleConfirm: () => {
-				console.log("confirm");
-			},
+			handleClose: () => null,
+			handleConfirm: () => null,
 		});
+
 		if (!confirmation) return;
-		nft.isOnSale = true;
-		nft.price = BigInt(price);
-		changeNft(nft, index);
-		//
-		toast.success("НФТ выставлено на продажу", {
-			position: "top-right",
-			autoClose: 1500,
-			hideProgressBar: true,
-			closeOnClick: true,
-			pauseOnHover: false,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
+		toast.promise(
+			createTransaction(
+				user.address,
+				"sellNft",
+				[nft.arrayIndex, price],
+				() => {
+					nft.isOnSale = true;
+					nft.price = BigInt(price);
+					changeNft(nft, index);
+				},
+				null,
+				null
+			),
+			{
+				pending: "Выставляем НФТ на продажу",
+				success: "НФТ теперь на продаже",
+				error: "Ошибка. Повторите попытку позже",
+			}
+		);
 	}
 
-	async function handleChangePrice(price: bigint | string, cb: () => void) {
+	async function changePriceNft(price: bigint | string, cb: () => void) {
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите изменить цену НФТ?",
@@ -47,21 +53,54 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		});
 		if (!confirmation) return;
 
-		nft.price = BigInt(price);
-		changeNft(nft, index);
-		//
-		toast.success("Цена НФТ изменена", {
-			position: "top-right",
-			autoClose: 1500,
-			hideProgressBar: true,
-			closeOnClick: true,
-			pauseOnHover: false,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
+		toast.promise(
+			createTransaction(
+				user.address,
+				"changeNftPrice",
+				[nft.arrayIndex, new BigNumber(price as string).multipliedBy(new BigNumber(10 ** 6)).toString()],
+				() => {
+					nft.price = BigInt(price);
+					changeNft(nft, index);
+				},
+				null,
+				null
+			),
+			{
+				pending: "Изменяем цену НФТ",
+				success: "Цена НФТ изменена",
+				error: "Ошибка. Повторите попытку позже",
+			}
+		);
+		cb();
+	}
+
+	async function cancelSaleNft() {
+		const confirmation = await confirmDialog({
+			title: "Подтверждение",
+			description: "Вы действительно хотите убрать НФТ с продажи?",
+			handleClose: () => null,
+			handleConfirm: () => null,
 		});
 
-		cb();
+		if (!confirmation) return;
+		toast.promise(
+			createTransaction(
+				user.address,
+				"cancelSellNft",
+				[nft.arrayIndex],
+				() => {
+					nft.isOnSale = false;
+					changeNft(nft, index);
+				},
+				null,
+				null
+			),
+			{
+				pending: "Убираем НФТ с продажи",
+				success: "НФТ убрано с продажи",
+				error: "Ошибка. Повторите попытку позже",
+			}
+		);
 	}
 
 	return (
@@ -75,15 +114,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			</Card.Body>
 			<Card.Footer>
 				{!nft.isOnSale && <SaleFooter sellNft={sellNft} />}
-				{nft.isOnSale && (
-					<OnSaleFooter
-						price={BigInt(nft.price)}
-						changePrice={handleChangePrice}
-						cancelSale={() => {
-							console.log("cancel sale");
-						}}
-					/>
-				)}
+				{nft.isOnSale && <OnSaleFooter price={nft.price} changePrice={changePriceNft} cancelSale={cancelSaleNft} />}
 			</Card.Footer>
 		</Card>
 	);

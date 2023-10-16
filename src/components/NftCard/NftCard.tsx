@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "hook/useAuth";
 import BigNumber from "bignumber.js";
 
+import styles from "./NftCard.module.css";
+
 function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNft: (cangedNft: INft, index: number) => void }) {
 	const { user } = useAuth();
 
@@ -94,15 +96,17 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 	}
 
 	return (
-		<Card style={{ height: "100%" }}>
-			<Card.Img variant="top" src={nft.pictureURL} />
+		<Card style={{ height: "100%" }} className={styles.nftCard}>
+			<div className={styles.nftImgContainer}>
+				<Card.Img variant="top" src={nft.pictureURL} className={styles.nftImage} />
+			</div>
 			<Card.Body>
 				<Card.Title>{nft.name}</Card.Title>
 				<Form.Group className="mb-3">
 					<Form.Label id="namenft">{nft.description}</Form.Label>
 				</Form.Group>
 			</Card.Body>
-			<Card.Footer>
+			<Card.Footer className={styles.nftFooter}>
 				{!nft.isOnSale && <SaleFooter sellNft={sellNft} />}
 				{nft.isOnSale && <OnSaleFooter price={nft.price} changePrice={changePriceNft} cancelSale={cancelSaleNft} />}
 			</Card.Footer>

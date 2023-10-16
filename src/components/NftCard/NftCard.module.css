@@ -1,0 +1,45 @@
+.nftImgContainer {
+	overflow: hidden;
+	border-radius: var(--bs-card-border-radius);
+}
+
+.nftImgContainer img {
+	transition: transform 0.5s ease;
+}
+
+.nftCard {
+	position: relative;
+	overflow: hidden;
+}
+
+.nftCard:hover img {
+	transform: scale(1.1);
+}
+
+.nftCard:hover .nftFooter,
+.nftCard:focus-within > .nftFooter {
+	animation: footerEaseIn 0.5s forwards;
+}
+
+.nftFooter {
+	transform: translateY(100%);
+	animation: footerEaseOut 0.5s forwards;
+}
+
+@keyframes footerEaseIn {
+	0% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes footerEaseOut {
+	0% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(100%);
+	}
+}

@@ -1,3 +1,20 @@
+.profileHeader{
+	display: flex;
+	gap: 50px;
+}
+
+.profileHeaderInfo{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.avatar{
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+}
+
 .refCodeContainer{
     display: flex;
     justify-content: left;

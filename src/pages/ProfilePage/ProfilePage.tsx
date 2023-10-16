@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../hook/useAuth";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Form, InputGroup, Button, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { web3 } from "../../config/connection";
 import createTransaction from "../../services/createTransaction";
@@ -58,34 +58,69 @@ function ProfilePage() {
 	}
 
 	return (
-		<div style={{ margin: "0 auto" }}>
-			<h1>Профиль</h1>
-			<p>Адрес: {user.address}</p>
-			<p>Никнейм: {user.login}</p>
-			<div className={styles.refCodeContainer}>
-				<p>Реферальный код:</p>
-				<p className={styles.refCode} onClick={handleCopy}>
-					PROFI-{user.address.slice(2, 6)}2023
-				</p>
-			</div>
-			<p>Скидка за друзей: {Number(user.discount)}%</p>
-			{!user.isRefCodeUsed && (
-				<InputGroup className="mb-3">
-					<Form.Control
-						placeholder="Введите реферальный код друга"
-						value={refValue}
-						onChange={(e) => {
-							setRefValue(e.target.value);
-						}}
-						disabled={refCodePending}
-					/>
-					<Button variant="success" id="basic-addon2" onClick={handleApplyRef} disabled={refCodePending}>
-						готово
-					</Button>
-				</InputGroup>
-			)}
-			{user.isRefCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
-		</div>
+		<Card>
+			<Card.Header className={styles.profileHeader}>
+				<img src="/images/examplenft.jpg" alt="profile avatar" className={styles.avatar} />
+				<div className={styles.profileHeaderInfo}>
+					<h1>{user.login}</h1>
+					<h5 style={{ wordBreak: "break-all" }}>{user.address}</h5>
+				</div>
+			</Card.Header>
+			<Card.Body>
+				<p>Баланс: 100 PROFI</p>
+				<div className={styles.refCodeContainer}>
+					<p>Реферальный код:</p>
+					<p className={styles.refCode} onClick={handleCopy}>
+						PROFI-{user.address.slice(2, 6)}2023
+					</p>
+				</div>
+				<p>Скидка за друзей: {Number(user.discount)}%</p>
+				{!user.isRefCodeUsed && (
+					<InputGroup className="mb-3">
+						<Form.Control
+							placeholder="Введите реферальный код друга"
+							value={refValue}
+							onChange={(e) => {
+								setRefValue(e.target.value);
+							}}
+							disabled={refCodePending}
+						/>
+						<Button variant="success" id="basic-addon2" onClick={handleApplyRef} disabled={refCodePending}>
+							готово
+						</Button>
+					</InputGroup>
+				)}
+				{user.isRefCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
+			</Card.Body>
+		</Card>
+		// <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+		// 	<h1>Профиль</h1>
+		// 	<p style={{wordBreak: "break-all"}}>Адрес: {user.address}</p>
+		// 	<p>Никнейм: {user.login}</p>
+		// 	<div className={styles.refCodeContainer}>
+		// 		<p>Реферальный код:</p>
+		// 		<p className={styles.refCode} onClick={handleCopy}>
+		// 			PROFI-{user.address.slice(2, 6)}2023
+		// 		</p>
+		// 	</div>
+		// 	<p>Скидка за друзей: {Number(user.discount)}%</p>
+		// 	{!user.isRefCodeUsed && (
+		// 		<InputGroup className="mb-3">
+		// 			<Form.Control
+		// 				placeholder="Введите реферальный код друга"
+		// 				value={refValue}
+		// 				onChange={(e) => {
+		// 					setRefValue(e.target.value);
+		// 				}}
+		// 				disabled={refCodePending}
+		// 			/>
+		// 			<Button variant="success" id="basic-addon2" onClick={handleApplyRef} disabled={refCodePending}>
+		// 				готово
+		// 			</Button>
+		// 		</InputGroup>
+		// 	)}
+		// 	{user.isRefCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
+		// </div>
 	);
 }
 

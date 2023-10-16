@@ -3,30 +3,18 @@ import ReactDOM from "react-dom/client";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-export function confirmDialog({
-	title,
-	description,
-	handleClose,
-	handleConfirm,
-}: {
-	title: string;
-	description: string;
-	handleClose: () => void;
-	handleConfirm: () => void;
-}): Promise<boolean> {
+export function confirmDialog({ title, description }: { title: string; description: string }): Promise<boolean> {
 	return new Promise<boolean>((resolve) => {
 		const modalRoot = document.createElement("div");
 		modalRoot.classList.add("modal-root");
 		document.body.appendChild(modalRoot);
 
 		const onClose = () => {
-			handleClose();
 			modalRoot.remove();
 			resolve(false);
 		};
 
 		const onConfirm = () => {
-			handleConfirm();
 			modalRoot.remove();
 			resolve(true);
 		};

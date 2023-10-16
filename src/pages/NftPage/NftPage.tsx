@@ -42,42 +42,6 @@ function NftPage() {
 		setLoadedImage(null);
 	}
 
-	async function sellNft(nft: INft) {
-		const confirmation = await confirmDialog({
-			title: "Подтверждение",
-			description: "Вы действительно хотите выставить на продажу?",
-			handleClose: () => {
-				console.log("close");
-			},
-			handleConfirm: () => {
-				toast.promise(
-					createTransaction(
-						user.address,
-						"sellNft",
-						[nft.arrayIndex, nft.price],
-						async () => {
-							getNfts(user.address, true).then((nfts) => {
-								setNfts(nfts);
-							});
-						},
-						null,
-						null
-					),
-					{
-						pending: "Проверяем реферальный код",
-						success: "Реферальный код применен",
-						error: "Ошибка. Проверьте правильность введенного кода",
-					}
-				);
-				console.log("confirm");
-			},
-		});
-		if (!confirmation) return;
-		nft.isOnSale = true;
-		console.log(nft);
-		setIsConfirmation(false);
-	}
-
 	return (
 		<Row className={styles.nftContainer}>
 			{/* <Col>

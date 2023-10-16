@@ -14,8 +14,6 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите выставить на продажу?",
-			handleClose: () => null,
-			handleConfirm: () => null,
 		});
 
 		if (!confirmation) return;
@@ -44,12 +42,6 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите изменить цену НФТ?",
-			handleClose: () => {
-				console.log("close");
-			},
-			handleConfirm: () => {
-				console.log("confirm");
-			},
 		});
 		if (!confirmation) return;
 
@@ -78,8 +70,6 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
 			description: "Вы действительно хотите убрать НФТ с продажи?",
-			handleClose: () => null,
-			handleConfirm: () => null,
 		});
 
 		if (!confirmation) return;

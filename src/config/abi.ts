@@ -59,10 +59,67 @@ export type abiType = [
 				type: "address";
 			},
 			{
+				components: [
+					{
+						internalType: "uint256";
+						name: "arrayIndex";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "erc20id";
+						type: "uint256";
+					},
+					{
+						internalType: "string";
+						name: "name";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "description";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "pictureURL";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "collection";
+						type: "string";
+					},
+					{
+						internalType: "uint256";
+						name: "price";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "creationDate";
+						type: "uint256";
+					},
+					{
+						internalType: "address";
+						name: "owner";
+						type: "address";
+					},
+					{
+						internalType: "bool";
+						name: "isOnSale";
+						type: "bool";
+					},
+					{
+						internalType: "bool";
+						name: "isSoldFromOwner";
+						type: "bool";
+					}
+				];
 				indexed: false;
-				internalType: "uint256";
-				name: "nftId";
-				type: "uint256";
+				internalType: "struct Profi.Nft";
+				name: "nft";
+				type: "tuple";
 			}
 		];
 		name: "buyNftEvent";
@@ -115,16 +172,67 @@ export type abiType = [
 				type: "address";
 			},
 			{
+				components: [
+					{
+						internalType: "uint256";
+						name: "arrayIndex";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "erc20id";
+						type: "uint256";
+					},
+					{
+						internalType: "string";
+						name: "name";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "description";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "pictureURL";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "collection";
+						type: "string";
+					},
+					{
+						internalType: "uint256";
+						name: "price";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "creationDate";
+						type: "uint256";
+					},
+					{
+						internalType: "address";
+						name: "owner";
+						type: "address";
+					},
+					{
+						internalType: "bool";
+						name: "isOnSale";
+						type: "bool";
+					},
+					{
+						internalType: "bool";
+						name: "isSoldFromOwner";
+						type: "bool";
+					}
+				];
 				indexed: false;
-				internalType: "uint256";
-				name: "nftId";
-				type: "uint256";
-			},
-			{
-				indexed: false;
-				internalType: "uint256";
-				name: "newPrice";
-				type: "uint256";
+				internalType: "struct Profi.Nft";
+				name: "nft";
+				type: "tuple";
 			}
 		];
 		name: "changePriceNftEvent";
@@ -234,10 +342,67 @@ export type abiType = [
 				type: "address";
 			},
 			{
+				components: [
+					{
+						internalType: "uint256";
+						name: "arrayIndex";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "erc20id";
+						type: "uint256";
+					},
+					{
+						internalType: "string";
+						name: "name";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "description";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "pictureURL";
+						type: "string";
+					},
+					{
+						internalType: "string";
+						name: "collection";
+						type: "string";
+					},
+					{
+						internalType: "uint256";
+						name: "price";
+						type: "uint256";
+					},
+					{
+						internalType: "uint256";
+						name: "creationDate";
+						type: "uint256";
+					},
+					{
+						internalType: "address";
+						name: "owner";
+						type: "address";
+					},
+					{
+						internalType: "bool";
+						name: "isOnSale";
+						type: "bool";
+					},
+					{
+						internalType: "bool";
+						name: "isSoldFromOwner";
+						type: "bool";
+					}
+				];
 				indexed: false;
-				internalType: "uint256";
-				name: "nftId";
-				type: "uint256";
+				internalType: "struct Profi.Nft";
+				name: "nft";
+				type: "tuple";
 			}
 		];
 		name: "makeSellNftEvent";
@@ -666,10 +831,67 @@ export const abi = [
 				type: "address",
 			},
 			{
+				components: [
+					{
+						internalType: "uint256",
+						name: "arrayIndex",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "erc20id",
+						type: "uint256",
+					},
+					{
+						internalType: "string",
+						name: "name",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "description",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "pictureURL",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "collection",
+						type: "string",
+					},
+					{
+						internalType: "uint256",
+						name: "price",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "creationDate",
+						type: "uint256",
+					},
+					{
+						internalType: "address",
+						name: "owner",
+						type: "address",
+					},
+					{
+						internalType: "bool",
+						name: "isOnSale",
+						type: "bool",
+					},
+					{
+						internalType: "bool",
+						name: "isSoldFromOwner",
+						type: "bool",
+					},
+				],
 				indexed: false,
-				internalType: "uint256",
-				name: "nftId",
-				type: "uint256",
+				internalType: "struct Profi.Nft",
+				name: "nft",
+				type: "tuple",
 			},
 		],
 		name: "buyNftEvent",
@@ -722,16 +944,67 @@ export const abi = [
 				type: "address",
 			},
 			{
+				components: [
+					{
+						internalType: "uint256",
+						name: "arrayIndex",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "erc20id",
+						type: "uint256",
+					},
+					{
+						internalType: "string",
+						name: "name",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "description",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "pictureURL",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "collection",
+						type: "string",
+					},
+					{
+						internalType: "uint256",
+						name: "price",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "creationDate",
+						type: "uint256",
+					},
+					{
+						internalType: "address",
+						name: "owner",
+						type: "address",
+					},
+					{
+						internalType: "bool",
+						name: "isOnSale",
+						type: "bool",
+					},
+					{
+						internalType: "bool",
+						name: "isSoldFromOwner",
+						type: "bool",
+					},
+				],
 				indexed: false,
-				internalType: "uint256",
-				name: "nftId",
-				type: "uint256",
-			},
-			{
-				indexed: false,
-				internalType: "uint256",
-				name: "newPrice",
-				type: "uint256",
+				internalType: "struct Profi.Nft",
+				name: "nft",
+				type: "tuple",
 			},
 		],
 		name: "changePriceNftEvent",
@@ -841,10 +1114,67 @@ export const abi = [
 				type: "address",
 			},
 			{
+				components: [
+					{
+						internalType: "uint256",
+						name: "arrayIndex",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "erc20id",
+						type: "uint256",
+					},
+					{
+						internalType: "string",
+						name: "name",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "description",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "pictureURL",
+						type: "string",
+					},
+					{
+						internalType: "string",
+						name: "collection",
+						type: "string",
+					},
+					{
+						internalType: "uint256",
+						name: "price",
+						type: "uint256",
+					},
+					{
+						internalType: "uint256",
+						name: "creationDate",
+						type: "uint256",
+					},
+					{
+						internalType: "address",
+						name: "owner",
+						type: "address",
+					},
+					{
+						internalType: "bool",
+						name: "isOnSale",
+						type: "bool",
+					},
+					{
+						internalType: "bool",
+						name: "isSoldFromOwner",
+						type: "bool",
+					},
+				],
 				indexed: false,
-				internalType: "uint256",
-				name: "nftId",
-				type: "uint256",
+				internalType: "struct Profi.Nft",
+				name: "nft",
+				type: "tuple",
 			},
 		],
 		name: "makeSellNftEvent",

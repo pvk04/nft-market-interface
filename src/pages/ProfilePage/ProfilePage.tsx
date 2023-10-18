@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hook/useAuth";
 import { Form, InputGroup, Button, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { web3 } from "../../config/connection";
 import createTransaction from "../../services/createTransaction";
-import styles from "./ProfilePage.module.css";
-
-import "react-toastify/dist/ReactToastify.min.css";
 import getUser from "services/getUser";
 
+import styles from "./ProfilePage.module.css";
+
 function ProfilePage() {
-	const { user, signin } = useAuth();
+	const { user, signin, refreshBalance } = useAuth();
 	const [refValue, setRefValue] = useState("");
 	const [refCodePending, setRefCodePending] = useState(false);
+
+	useEffect(() => {
+		refreshBalance();
+	}, []);
 
 	async function handleCopy() {
 		document.execCommand("copy", true, `PROFI-${user.address.slice(2, 6)}2023`);
@@ -24,7 +27,7 @@ function ProfilePage() {
 
 	async function handleApplyRef() {
 		try {
-			setRefCodePending(true); // TODO disabled для кнопки и инпута во время промиса
+			setRefCodePending(true);
 			const refCodePart1 = refValue.slice(0, 6);
 			const refCodePart2 = refValue.slice(6, 10);
 			const refCodePart3 = refValue.slice(10, 14);
@@ -60,14 +63,14 @@ function ProfilePage() {
 	return (
 		<Card>
 			<Card.Header className={styles.profileHeader}>
-				<img src="/images/examplenft.jpg" alt="profile avatar" className={styles.avatar} />
+				<img src="/images/profilePicture.jpg" alt="profile avatar" className={styles.avatar} />
 				<div className={styles.profileHeaderInfo}>
 					<h1>{user.login}</h1>
 					<h5 style={{ wordBreak: "break-all" }}>{user.address}</h5>
 				</div>
 			</Card.Header>
 			<Card.Body>
-				<p>Баланс: 100 PROFI</p>
+				<p>Баланс: {user.balance} PROFI</p>
 				<div className={styles.refCodeContainer}>
 					<p>Реферальный код:</p>
 					<p className={styles.refCode} onClick={handleCopy}>

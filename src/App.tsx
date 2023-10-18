@@ -8,9 +8,14 @@ import { AuthProvider } from "./hoc/AuthProvider";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import NftPage from "pages/NftPage/NftPage";
 import { ToastContainer } from "react-toastify";
+import MarketPage from "pages/MarketPage/MarketPage";
+import { useAuth } from "hook/useAuth";
+
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
 	const navigate = useNavigate();
+	const {user} = useAuth()
 
 	useEffect(() => {
 		function checkMetamask() {
@@ -24,7 +29,21 @@ function App() {
 			navigate("/");
 		}
 		checkMetamask();
+
+		window.ethereum?.on("accountsChanged", handleAccountChange);
+
+		return () => {
+			window.ethereum?.removeListener("accountsChanged", handleAccountChange);
+		};
 	}, []);
+
+	const handleAccountChange = (...args: any[]) => {
+		const accounts = args[0];
+
+		if (accounts[0] !== user.address) {
+			navigate("/login");
+		}
+	};
 
 	return (
 		<div className="App">
@@ -40,7 +59,7 @@ function App() {
 					>
 						<Route path="profile" element={<ProfilePage />} />
 						<Route path="collection" element={<NftPage />} />
-						<Route path="market" element={<h1>market</h1>} />
+						<Route path="market" element={<MarketPage />} />
 					</Route>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/error" element={<ErrorPage errorCode={403} errorMessage={"У вас нет расширения METAMASK"} />} />

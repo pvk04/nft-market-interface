@@ -1,0 +1,7 @@
+.nftContainer {
+	padding-top: 15px;
+	height: calc(100vh - 62px);
+	overflow-y: auto;
+	background: #37393f37;
+	border-radius: 5px;
+}

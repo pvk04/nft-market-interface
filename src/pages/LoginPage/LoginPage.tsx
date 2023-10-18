@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, Form, Button } from "react-bootstrap";
 import { FormEvent } from "react";
@@ -18,7 +18,11 @@ function LoginPage(): JSX.Element {
 	const [invalidLogin, setInvalidLogin] = useState(false);
 	const [login, setLogin] = useState("");
 
-	const fromPage = location.state?.from?.pathname || "/";
+	const fromPage = location.state?.from?.pathname || "/profile";
+
+	useEffect(() => {
+		getAddress();
+	});
 
 	// get address from metamask
 	async function getAddress() {
@@ -94,9 +98,7 @@ function LoginPage(): JSX.Element {
 					{notRegistered && <RegistrationForm login={login} setLogin={setLogin} invalidLogin={invalidLogin} />}
 				</Card.Body>
 				<Card.Footer>
-					<Button type="submit">
-						{currentAddress ? (notRegistered ? "Зарегистрироваться" : "Войти") : "Подключить кошелек"}
-					</Button>
+					<Button type="submit">{currentAddress ? (notRegistered ? "Зарегистрироваться" : "Войти") : "Подключить кошелек"}</Button>
 				</Card.Footer>
 			</Card>
 		</Form>

@@ -8,9 +8,10 @@ import { useAuth } from "hook/useAuth";
 import BigNumber from "bignumber.js";
 
 import styles from "./NftCard.module.css";
+import BuyFooter from "./Footers/BuyFooter";
 
 function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNft: (cangedNft: INft, index: number) => void }) {
-	const { user } = useAuth();
+	const { user, refreshBalance } = useAuth();
 
 	async function sellNft(price: string | number) {
 		const confirmation = await confirmDialog({
@@ -95,8 +96,42 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 		);
 	}
 
+	async function buyNft() {
+		refreshBalance();
+		if (Number(user.balance) < nft.price) {
+			const priceDiff = Math.abs(Number(user.balance) - nft.price);
+			toast.error(`У вас нехватает ${priceDiff} PROFI для покупки`);
+			return;
+		}
+
+		const confirmation = await confirmDialog({ title: "Подтверждение покупки", description: "Вы действительно хотите купить эту НФТ?" });
+
+		if (!confirmation) return;
+
+		toast.promise(
+			createTransaction(
+				user.address,
+				"buyNft",
+				[nft.arrayIndex],
+				() => {
+					nft.owner = user.address;
+					nft.isOnSale = false;
+					refreshBalance();
+					changeNft(nft, index);
+				},
+				null,
+				null
+			),
+			{
+				pending: "Покупаем НФТ",
+				success: "Поздравляем, НФТ куплено!",
+				error: "Ошибка. Повторите попытку позже",
+			}
+		);
+	}
+
 	return (
-		<Card style={{ height: "100%" }} className={styles.nftCard}>
+		<Card style={{ height: "550px" }} className={styles.nftCard}>
 			<div className={styles.nftImgContainer}>
 				<Card.Img variant="top" src={nft.pictureURL} className={styles.nftImage} />
 			</div>
@@ -108,7 +143,10 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			</Card.Body>
 			<Card.Footer className={styles.nftFooter}>
 				{!nft.isOnSale && <SaleFooter sellNft={sellNft} />}
-				{nft.isOnSale && <OnSaleFooter price={nft.price} changePrice={changePriceNft} cancelSale={cancelSaleNft} />}
+				{nft.isOnSale && user.address === nft.owner && (
+					<OnSaleFooter price={nft.price} changePrice={changePriceNft} cancelSale={cancelSaleNft} />
+				)}
+				{nft.isOnSale && user.address !== nft.owner && <BuyFooter price={nft.price} buyNft={buyNft} />}
 			</Card.Footer>
 		</Card>
 	);

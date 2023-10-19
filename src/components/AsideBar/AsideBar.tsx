@@ -6,9 +6,9 @@ import styles from "./AsideBar.module.css";
 
 const MenuItems = [
 	// { name: "Профиль", href: "/profile" },
-	{ name: "Мои НФТ", img: <TbPhotoHexagon color="#a3a3a3" />, href: "/collection" },
-	{ name: "Создать НФТ", img: <TbHexagonPlus color="#a3a3a3" />, href: "/newNFT" }, // ограничение по роли
-	{ name: "Маркет", img: <TbShoppingBag color="#a3a3a3" />, href: "/market" },
+	{ name: "Мои НФТ", img: <TbPhotoHexagon color="#a3a3a3" />, href: "/collection", roles: [] },
+	{ name: "Создать НФТ", img: <TbHexagonPlus color="#a3a3a3" />, href: "/newNFT", roles: [2] }, // ограничение по роли
+	{ name: "Маркет", img: <TbShoppingBag color="#a3a3a3" />, href: "/market", roles: [] },
 ];
 
 function AsideBar() {
@@ -35,14 +35,18 @@ function AsideBar() {
 							</div>
 						</NavLink>
 					</li>
-					{MenuItems.map(({ name, img, href }, index) => (
-						<li className={styles.navListElement} key={index}>
-							<NavLink className={({ isActive }) => (isActive ? styles.navListElementActive : ``)} to={href}>
-								{img}
-								<span>{name}</span>
-							</NavLink>
-						</li>
-					))}
+					{MenuItems.map(({ name, img, href, roles }, index) => {
+						if (roles.length && !roles.includes(Number(user.role))) return null;
+
+						return (
+							<li className={styles.navListElement} key={index}>
+								<NavLink className={({ isActive }) => (isActive ? styles.navListElementActive : ``)} to={href}>
+									{img}
+									<span>{name}</span>
+								</NavLink>
+							</li>
+						);
+					})}
 				</ul>
 			</nav>
 			<button className={styles.logout}>

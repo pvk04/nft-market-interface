@@ -1,21 +1,24 @@
+import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { useAuth } from "hook/useAuth";
+
+import { AuthProvider } from "./hoc/AuthProvider";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RequireAuth from "./hoc/RequireAuth";
+import RequireRole from "hoc/RequireRole";
 import MainPage from "./pages/MainPage/MainPage";
-import { useEffect } from "react";
-import { AuthProvider } from "./hoc/AuthProvider";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import NftPage from "pages/NftPage/NftPage";
-import { ToastContainer } from "react-toastify";
+import CreationNft from "components/CreationNft/CreationNft";
 import MarketPage from "pages/MarketPage/MarketPage";
-import { useAuth } from "hook/useAuth";
 
 import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
 	const navigate = useNavigate();
-	const {user} = useAuth()
+	const { user } = useAuth();
 
 	useEffect(() => {
 		function checkMetamask() {
@@ -59,6 +62,14 @@ function App() {
 					>
 						<Route path="profile" element={<ProfilePage />} />
 						<Route path="collection" element={<NftPage />} />
+						<Route
+							path="newNFT"
+							element={
+								<RequireRole roles={[2]}>
+									<CreationNft />
+								</RequireRole>
+							}
+						/>
 						<Route path="market" element={<MarketPage />} />
 					</Route>
 					<Route path="/login" element={<LoginPage />} />

@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "hook/useAuth";
-import { RiNftLine } from "react-icons/ri";
-import { LiaShoppingBagSolid } from "react-icons/lia";
+import { TbHexagonPlus, TbPhotoHexagon, TbShoppingBag } from "react-icons/tb";
 
 import styles from "./AsideBar.module.css";
 
 const MenuItems = [
 	// { name: "Профиль", href: "/profile" },
-	{ name: "Мои нфт", img: <RiNftLine color="#a3a3a3" />, href: "/collection" },
-	{ name: "Маркет", img: <LiaShoppingBagSolid color="#a3a3a3" />, href: "/market" },
+	{ name: "Мои НФТ", img: <TbPhotoHexagon color="#a3a3a3" />, href: "/collection" },
+	{ name: "Создать НФТ", img: <TbHexagonPlus color="#a3a3a3" />, href: "/newNFT" }, // ограничение по роли
+	{ name: "Маркет", img: <TbShoppingBag color="#a3a3a3" />, href: "/market" },
 ];
 
 function AsideBar() {

@@ -7,7 +7,7 @@ import styles from "./AsideBar.module.css";
 const MenuItems = [
 	// { name: "Профиль", href: "/profile" },
 	{ name: "Мои НФТ", img: <TbPhotoHexagon color="#a3a3a3" />, href: "/collection", roles: [] },
-	{ name: "Создать НФТ", img: <TbHexagonPlus color="#a3a3a3" />, href: "/newNFT", roles: [2] }, // ограничение по роли
+	{ name: "Создать НФТ", img: <TbHexagonPlus color="#a3a3a3" />, href: "/newNFT", roles: [] },
 	{ name: "Маркет", img: <TbShoppingBag color="#a3a3a3" />, href: "/market", roles: [] },
 ];
 
@@ -31,12 +31,12 @@ function AsideBar() {
 							<img src="/images/profilePicture.jpg" alt="" style={{ borderRadius: "50%" }} />
 							<div style={{ display: "flex", flexDirection: "column" }}>
 								<span className={styles.login}>{user.login}</span>
-								<span>{user.balance} Profi</span>
+								<span>{user.balance} ETH</span>
 							</div>
 						</NavLink>
 					</li>
 					{MenuItems.map(({ name, img, href, roles }, index) => {
-						if (roles.length && !roles.includes(Number(user.role))) return null;
+						// if (roles.length && !roles.includes(Number(user.role))) return null;
 
 						return (
 							<li className={styles.navListElement} key={index}>

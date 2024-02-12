@@ -10,55 +10,55 @@ import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
 	const { user, signin, refreshBalance } = useAuth();
-	const [refValue, setRefValue] = useState("");
-	const [refCodePending, setRefCodePending] = useState(false);
+	// const [refValue, setRefValue] = useState("");
+	// const [refCodePending, setRefCodePending] = useState(false);
 
 	useEffect(() => {
 		refreshBalance();
 	}, []);
 
-	async function handleCopy() {
-		document.execCommand("copy", true, `PROFI-${user.address.slice(2, 6)}2023`);
-		await navigator.clipboard.writeText(`PROFI-${user.address.slice(2, 6)}2023`);
-		toast.success("Реферальный код успешно скопирован", {
-			position: "top-right",
-		});
-	}
+	// async function handleCopy() {
+	// 	document.execCommand("copy", true, `PROFI-${user.address.slice(2, 6)}2023`);
+	// 	await navigator.clipboard.writeText(`PROFI-${user.address.slice(2, 6)}2023`);
+	// 	toast.success("Реферальный код успешно скопирован", {
+	// 		position: "top-right",
+	// 	});
+	// }
 
-	async function handleApplyRef() {
-		try {
-			setRefCodePending(true);
-			const refCodePart1 = refValue.slice(0, 6);
-			const refCodePart2 = refValue.slice(6, 10);
-			const refCodePart3 = refValue.slice(10, 14);
+	// async function handleApplyRef() {
+	// 	try {
+	// 		setRefCodePending(true);
+	// 		const refCodePart1 = refValue.slice(0, 6);
+	// 		const refCodePart2 = refValue.slice(6, 10);
+	// 		const refCodePart3 = refValue.slice(10, 14);
 
-			const resultCode = web3.utils.toHex(refCodePart1) + refCodePart2 + web3.utils.asciiToHex(refCodePart3).slice(2);
+	// 		const resultCode = web3.utils.toHex(refCodePart1) + refCodePart2 + web3.utils.asciiToHex(refCodePart3).slice(2);
 
-			toast.promise(
-				createTransaction(
-					user.address,
-					"applyRefCode",
-					[resultCode],
-					async () => {
-						const userRefreshed = await getUser(user.address);
-						signin(userRefreshed, () => null);
-					},
-					null,
-					() => {
-						setRefCodePending(false);
-					}
-				),
-				{
-					pending: "Проверяем реферальный код",
-					success: "Реферальный код применен",
-					error: "Ошибка. Проверьте правильность введенного кода",
-				}
-			);
-		} catch (e) {
-			console.log(e);
-			alert("Ошибка");
-		}
-	}
+	// 		toast.promise(
+	// 			createTransaction(
+	// 				user.address,
+	// 				"applyRefCode",
+	// 				[resultCode],
+	// 				async () => {
+	// 					const userRefreshed = await getUser(user.address);
+	// 					signin(userRefreshed, () => null);
+	// 				},
+	// 				null,
+	// 				() => {
+	// 					setRefCodePending(false);
+	// 				}
+	// 			),
+	// 			{
+	// 				pending: "Проверяем реферальный код",
+	// 				success: "Реферальный код применен",
+	// 				error: "Ошибка. Проверьте правильность введенного кода",
+	// 			}
+	// 		);
+	// 	} catch (e) {
+	// 		console.log(e);
+	// 		alert("Ошибка");
+	// 	}
+	// }
 
 	return (
 		<Card>
@@ -66,11 +66,13 @@ function ProfilePage() {
 				<img src="/images/profilePicture.jpg" alt="profile avatar" className={styles.avatar} />
 				<div className={styles.profileHeaderInfo}>
 					<h1>{user.login}</h1>
-					<h5 style={{ wordBreak: "break-all" }}>{user.address}</h5>
+					{/* <h5 style={{ wordBreak: "break-all" }}>{user.address}</h5> */}
 				</div>
 			</Card.Header>
 			<Card.Body>
-				<p>Баланс: {user.balance} PROFI</p>
+				<p>Адрес: {user.address}</p>
+				<p>Баланс: {user.balance} ETH</p>
+				{/* <p>Баланс: {user.balance} PROFI</p>
 				<div className={styles.refCodeContainer}>
 					<p>Реферальный код:</p>
 					<p className={styles.refCode} onClick={handleCopy}>
@@ -93,7 +95,7 @@ function ProfilePage() {
 						</Button>
 					</InputGroup>
 				)}
-				{user.isRefCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>}
+				{user.isRefCodeUsed && <p style={{ color: "#198754" }}>Реферальный код использован</p>} */}
 			</Card.Body>
 		</Card>
 		// <div style={{ maxWidth: "600px", margin: "0 auto" }}>

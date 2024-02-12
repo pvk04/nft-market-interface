@@ -2,6 +2,22 @@
     padding-top: 15px;
     height: calc(100vh - 62px);
     overflow-y: auto;
-    background: #37393f37;
+    /* background: #37393f37; */
     border-radius: 5px;
+}
+
+.errorText {
+	font-size: 50px;
+	font-weight: bold;
+	background-color: #b9b9b9;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.errorText > a {
+	text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3);
+    text-decoration: underline;
 }

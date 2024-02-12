@@ -7,7 +7,7 @@ import { AuthProvider } from "./hoc/AuthProvider";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RequireAuth from "./hoc/RequireAuth";
-import RequireRole from "hoc/RequireRole";
+// import RequireRole from "hoc/RequireRole";
 import MainPage from "./pages/MainPage/MainPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import NftPage from "pages/NftPage/NftPage";
@@ -65,9 +65,9 @@ function App() {
 						<Route
 							path="newNFT"
 							element={
-								<RequireRole roles={[2]}>
+								// <RequireRole roles={[2]}>
 									<CreationNft />
-								</RequireRole>
+								// </RequireRole>
 							}
 						/>
 						<Route path="market" element={<MarketPage />} />

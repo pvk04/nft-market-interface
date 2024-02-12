@@ -9,6 +9,7 @@ import BigNumber from "bignumber.js";
 
 import styles from "./NftCard.module.css";
 import BuyFooter from "./Footers/BuyFooter";
+import { web3 } from "config/connection";
 
 function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNft: (cangedNft: INft, index: number) => void }) {
 	const { user, refreshBalance } = useAuth();
@@ -24,7 +25,8 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"sellNft",
-				[nft.arrayIndex, price],
+				[nft.erc20id, BigInt(Number(price) * 10 ** 18)],
+				{},
 				() => {
 					nft.isOnSale = true;
 					nft.price = BigInt(price);
@@ -52,7 +54,8 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"changeNftPrice",
-				[nft.arrayIndex, new BigNumber(price as string).multipliedBy(new BigNumber(10 ** 6)).toString()],
+				[nft.erc20id, new BigNumber(price as string).multipliedBy(new BigNumber(10 ** 18)).toString()],
+				{},
 				() => {
 					nft.price = BigInt(price);
 					changeNft(nft, index);
@@ -80,7 +83,8 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"cancelSellNft",
-				[nft.arrayIndex],
+				[nft.erc20id],
+				{},
 				() => {
 					nft.isOnSale = false;
 					changeNft(nft, index);
@@ -98,9 +102,9 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 
 	async function buyNft() {
 		refreshBalance();
-		if (Number(user.balance) < nft.price) {
+		if (Number(user.balance) * 10 ** 18 < nft.price) {
 			const priceDiff = Math.abs(Number(user.balance) - nft.price);
-			toast.error(`У вас нехватает ${priceDiff} PROFI для покупки`);
+			toast.error(`У вас не хватает ${priceDiff} ETH для покупки`);
 			return;
 		}
 
@@ -112,7 +116,8 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"buyNft",
-				[nft.arrayIndex],
+				[nft.erc20id],
+				{ value: web3.utils.toWei(Number(nft.price), "wei") },
 				() => {
 					nft.owner = user.address;
 					nft.isOnSale = false;
@@ -144,9 +149,9 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			<Card.Footer className={styles.nftFooter}>
 				{!nft.isOnSale && <SaleFooter sellNft={sellNft} />}
 				{nft.isOnSale && user.address === nft.owner && (
-					<OnSaleFooter price={nft.price} changePrice={changePriceNft} cancelSale={cancelSaleNft} />
+					<OnSaleFooter price={nft.showPrice ?? ""} changePrice={changePriceNft} cancelSale={cancelSaleNft} />
 				)}
-				{nft.isOnSale && user.address !== nft.owner && <BuyFooter price={nft.price} buyNft={buyNft} />}
+				{nft.isOnSale && user.address !== nft.owner && <BuyFooter price={nft.price} showPrice={nft.showPrice ?? ""} buyNft={buyNft} />}
 			</Card.Footer>
 		</Card>
 	);

@@ -102,7 +102,7 @@ function CreationNft() {
 	async function createNft(name: string, description: string, image: string) {
 		const confirmation = await confirmDialog({
 			title: "Подтверждение",
-			description: "Вы действительно хотите выставить на продажу?",
+			description: "Вы действительно хотите создать NFT?",
 		});
 
 		if (!confirmation) return;
@@ -119,6 +119,7 @@ function CreationNft() {
 				user.address,
 				"mintNft",
 				[name, description, imageUrl],
+				{},
 				() => {
 					setFormData({ name: "", description: "", loadedImage: undefined });
 					if (imageInput.current) {

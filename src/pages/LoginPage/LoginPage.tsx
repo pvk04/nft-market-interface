@@ -69,15 +69,15 @@ function LoginPage(): JSX.Element {
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
-		// registration
+		// регистрация
 		if (notRegistered) {
-			// login validation
+			// валидация никнейма
 			setInvalidLogin(false);
 			if (login.length < 3) {
 				setInvalidLogin(true);
 				return;
 			}
-			// call registration func
+			// вызов функции регистрации
 			registerAccount();
 			return;
 		}

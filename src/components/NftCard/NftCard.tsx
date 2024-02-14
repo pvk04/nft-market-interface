@@ -25,7 +25,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"sellNft",
-				[nft.erc20id, BigInt(Number(price) * 10 ** 18)],
+				[nft.ercId, BigInt(Number(price) * 10 ** 18)],
 				{},
 				() => {
 					nft.isOnSale = true;
@@ -54,7 +54,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"changeNftPrice",
-				[nft.erc20id, new BigNumber(price as string).multipliedBy(new BigNumber(10 ** 18)).toString()],
+				[nft.ercId, new BigNumber(price as string).multipliedBy(new BigNumber(10 ** 18)).toString()],
 				{},
 				() => {
 					nft.price = BigInt(price);
@@ -83,7 +83,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"cancelSellNft",
-				[nft.erc20id],
+				[nft.ercId],
 				{},
 				() => {
 					nft.isOnSale = false;
@@ -116,7 +116,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			createTransaction(
 				user.address,
 				"buyNft",
-				[nft.erc20id],
+				[nft.ercId],
 				{ value: web3.utils.toWei(Number(nft.price), "wei") },
 				() => {
 					nft.owner = user.address;

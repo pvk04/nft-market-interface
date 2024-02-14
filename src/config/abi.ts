@@ -86,7 +86,7 @@ export type abiType = [
 				components: [
 					{
 						internalType: "uint8";
-						name: "erc20id";
+						name: "ercId";
 						type: "uint8";
 					},
 					{
@@ -228,7 +228,7 @@ export type abiType = [
 				components: [
 					{
 						internalType: "uint8";
-						name: "erc20id";
+						name: "ercId";
 						type: "uint8";
 					},
 					{
@@ -369,7 +369,7 @@ export type abiType = [
 		outputs: [
 			{
 				internalType: "uint8";
-				name: "erc20id";
+				name: "ercId";
 				type: "uint8";
 			},
 			{
@@ -416,25 +416,6 @@ export type abiType = [
 				internalType: "bool";
 				name: "isSoldFromOwner";
 				type: "bool";
-			}
-		];
-		stateMutability: "view";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
-				internalType: "bytes";
-				name: "";
-				type: "bytes";
-			}
-		];
-		name: "refCodes";
-		outputs: [
-			{
-				internalType: "address";
-				name: "";
-				type: "address";
 			}
 		];
 		stateMutability: "view";
@@ -590,7 +571,7 @@ export const abi = [
 				components: [
 					{
 						internalType: "uint8",
-						name: "erc20id",
+						name: "ercId",
 						type: "uint8",
 					},
 					{
@@ -732,7 +713,7 @@ export const abi = [
 				components: [
 					{
 						internalType: "uint8",
-						name: "erc20id",
+						name: "ercId",
 						type: "uint8",
 					},
 					{
@@ -873,7 +854,7 @@ export const abi = [
 		outputs: [
 			{
 				internalType: "uint8",
-				name: "erc20id",
+				name: "ercId",
 				type: "uint8",
 			},
 			{
@@ -920,25 +901,6 @@ export const abi = [
 				internalType: "bool",
 				name: "isSoldFromOwner",
 				type: "bool",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "bytes",
-				name: "",
-				type: "bytes",
-			},
-		],
-		name: "refCodes",
-		outputs: [
-			{
-				internalType: "address",
-				name: "",
-				type: "address",
 			},
 		],
 		stateMutability: "view",

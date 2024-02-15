@@ -31,6 +31,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 					nft.isOnSale = true;
 					nft.price = BigInt(price);
 					changeNft(nft, index);
+					refreshBalance();
 				},
 				null,
 				null
@@ -59,6 +60,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 				() => {
 					nft.price = BigInt(price);
 					changeNft(nft, index);
+					refreshBalance();
 				},
 				null,
 				null
@@ -88,6 +90,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 				() => {
 					nft.isOnSale = false;
 					changeNft(nft, index);
+					refreshBalance();
 				},
 				null,
 				null
@@ -101,7 +104,6 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 	}
 
 	async function buyNft() {
-		refreshBalance();
 		if (Number(user.balance) * 10 ** 18 < nft.price) {
 			const priceDiff = Math.abs(Number(user.balance) * 10 ** 18 - nft.price) / 10 ** 18;
 			toast.error(`У вас не хватает ${priceDiff} ETH для покупки`);
@@ -121,8 +123,8 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 				() => {
 					nft.owner = user.address;
 					nft.isOnSale = false;
-					refreshBalance();
 					changeNft(nft, index);
+					refreshBalance();
 				},
 				null,
 				null
@@ -143,7 +145,9 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			<Card.Body>
 				<Card.Title>{nft.name}</Card.Title>
 				<Form.Group className="mb-3">
-					<Form.Label id="namenft" style={{wordBreak: "break-all"}}>{nft.description}</Form.Label>
+					<Form.Label id="namenft" style={{ wordBreak: "break-all" }}>
+						{nft.description}
+					</Form.Label>
 				</Form.Group>
 			</Card.Body>
 			<Card.Footer className={styles.nftFooter}>

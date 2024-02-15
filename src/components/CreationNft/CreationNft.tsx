@@ -89,8 +89,8 @@ function CreationNft() {
 		if ((data.name.trim() && data.name.trim().length < 3) || data.name.trim().length > 25) {
 			errors.name = "Название должно быть длиной от 3 до 25 символов";
 		}
-		if (data.description.trim() && data.description.trim().length > 200) {
-			errors.description = "Описание НФТ не может быть длиннее 200 символов";
+		if (data.description.trim() && data.description.trim().length > 100) {
+			errors.description = "Описание НФТ не может быть длиннее 100 символов";
 		}
 		if (!data.loadedImage) {
 			errors.loadedImage = "Выберите картику НФТ";
@@ -172,7 +172,7 @@ function CreationNft() {
 									value={formData.description}
 									onChange={handleInputChange}
 									isInvalid={!!errors.description}
-									maxLength={200}
+									maxLength={100}
 								/>
 								<Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
 							</Form.Group>

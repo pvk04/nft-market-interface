@@ -4,11 +4,9 @@ interface INft {
 	name: string;
 	description: string;
 	pictureURL: string;
-	collection: string;
 	price: MatchPrimitiveType<"uint256", bigint>;
 	showPrice?: string;
 	creationDate: MatchPrimitiveType<"uint256", bigint>;
 	owner: string;
 	isOnSale: boolean;
-	isSoldFromOwner: boolean;
 }

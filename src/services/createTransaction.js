@@ -5,7 +5,7 @@ export default async function createTransaction(fromAddress, functionName, funct
 		try {
 			const gasPrice = await web3.eth.getGasPrice();
 			let gasLimit;
-			if (!transactionObjVals.value) gasLimit = await contract.methods[functionName](...functionParams).estimateGas({ from: fromAddress });
+			if (!transactionObjVals?.value) gasLimit = await contract.methods[functionName](...functionParams).estimateGas({ from: fromAddress });
 			const data = contract.methods[functionName](...functionParams).encodeABI();
 
 			const transactionObject = {

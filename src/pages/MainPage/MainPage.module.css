@@ -1,5 +1,6 @@
 .mainContainer {
-	width: calc(100vw - 270px);
+	max-width: calc(100vw - 270px) !important;
+	margin: 0 !important;
 	padding: 62px 10px 0px 10px;
 	overflow: hide;
 }

@@ -105,11 +105,6 @@ export type abiType = [
 						type: "string";
 					},
 					{
-						internalType: "string";
-						name: "collection";
-						type: "string";
-					},
-					{
 						internalType: "uint256";
 						name: "price";
 						type: "uint256";
@@ -127,11 +122,6 @@ export type abiType = [
 					{
 						internalType: "bool";
 						name: "isOnSale";
-						type: "bool";
-					},
-					{
-						internalType: "bool";
-						name: "isSoldFromOwner";
 						type: "bool";
 					}
 				];
@@ -247,11 +237,6 @@ export type abiType = [
 						type: "string";
 					},
 					{
-						internalType: "string";
-						name: "collection";
-						type: "string";
-					},
-					{
 						internalType: "uint256";
 						name: "price";
 						type: "uint256";
@@ -269,11 +254,6 @@ export type abiType = [
 					{
 						internalType: "bool";
 						name: "isOnSale";
-						type: "bool";
-					},
-					{
-						internalType: "bool";
-						name: "isSoldFromOwner";
 						type: "bool";
 					}
 				];
@@ -314,24 +294,6 @@ export type abiType = [
 			}
 		];
 		stateMutability: "view";
-		type: "function";
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256";
-				name: "id";
-				type: "uint256";
-			},
-			{
-				internalType: "address";
-				name: "user";
-				type: "address";
-			}
-		];
-		name: "giftNft";
-		outputs: [];
-		stateMutability: "nonpayable";
 		type: "function";
 	},
 	{
@@ -388,11 +350,6 @@ export type abiType = [
 				type: "string";
 			},
 			{
-				internalType: "string";
-				name: "collection";
-				type: "string";
-			},
-			{
 				internalType: "uint256";
 				name: "price";
 				type: "uint256";
@@ -410,11 +367,6 @@ export type abiType = [
 			{
 				internalType: "bool";
 				name: "isOnSale";
-				type: "bool";
-			},
-			{
-				internalType: "bool";
-				name: "isSoldFromOwner";
 				type: "bool";
 			}
 		];
@@ -590,11 +542,6 @@ export const abi = [
 						type: "string",
 					},
 					{
-						internalType: "string",
-						name: "collection",
-						type: "string",
-					},
-					{
 						internalType: "uint256",
 						name: "price",
 						type: "uint256",
@@ -612,11 +559,6 @@ export const abi = [
 					{
 						internalType: "bool",
 						name: "isOnSale",
-						type: "bool",
-					},
-					{
-						internalType: "bool",
-						name: "isSoldFromOwner",
 						type: "bool",
 					},
 				],
@@ -732,11 +674,6 @@ export const abi = [
 						type: "string",
 					},
 					{
-						internalType: "string",
-						name: "collection",
-						type: "string",
-					},
-					{
 						internalType: "uint256",
 						name: "price",
 						type: "uint256",
@@ -754,11 +691,6 @@ export const abi = [
 					{
 						internalType: "bool",
 						name: "isOnSale",
-						type: "bool",
-					},
-					{
-						internalType: "bool",
-						name: "isSoldFromOwner",
 						type: "bool",
 					},
 				],
@@ -799,24 +731,6 @@ export const abi = [
 			},
 		],
 		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256",
-				name: "id",
-				type: "uint256",
-			},
-			{
-				internalType: "address",
-				name: "user",
-				type: "address",
-			},
-		],
-		name: "giftNft",
-		outputs: [],
-		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
@@ -873,11 +787,6 @@ export const abi = [
 				type: "string",
 			},
 			{
-				internalType: "string",
-				name: "collection",
-				type: "string",
-			},
-			{
 				internalType: "uint256",
 				name: "price",
 				type: "uint256",
@@ -895,11 +804,6 @@ export const abi = [
 			{
 				internalType: "bool",
 				name: "isOnSale",
-				type: "bool",
-			},
-			{
-				internalType: "bool",
-				name: "isSoldFromOwner",
 				type: "bool",
 			},
 		],

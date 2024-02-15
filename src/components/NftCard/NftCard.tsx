@@ -103,7 +103,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 	async function buyNft() {
 		refreshBalance();
 		if (Number(user.balance) * 10 ** 18 < nft.price) {
-			const priceDiff = Math.abs(Number(user.balance) - nft.price);
+			const priceDiff = Math.abs(Number(user.balance) * 10 ** 18 - nft.price) / 10 ** 18;
 			toast.error(`У вас не хватает ${priceDiff} ETH для покупки`);
 			return;
 		}
@@ -143,7 +143,7 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 			<Card.Body>
 				<Card.Title>{nft.name}</Card.Title>
 				<Form.Group className="mb-3">
-					<Form.Label id="namenft">{nft.description}</Form.Label>
+					<Form.Label id="namenft" style={{wordBreak: "break-all"}}>{nft.description}</Form.Label>
 				</Form.Group>
 			</Card.Body>
 			<Card.Footer className={styles.nftFooter}>

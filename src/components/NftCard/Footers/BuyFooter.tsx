@@ -4,7 +4,7 @@ function BuyFooter({ price, showPrice, buyNft }: { price: bigint; showPrice: str
 	return (
 		<div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 			<Card.Text>
-				<span style={{ fontWeight: "600" }}>{showPrice}</span> ETH
+				<span style={{ fontWeight: "600", wordBreak:"break-all" }}>{showPrice}</span> ETH
 			</Card.Text>
 			<Button variant="success" onClick={buyNft}>
 				Купить

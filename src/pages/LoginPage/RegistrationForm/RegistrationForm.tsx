@@ -12,7 +12,7 @@ function RegistrationForm({ login, setLogin, invalidLogin }: RegistrationFormPro
 			<InputGroup>
 				<InputGroup.Text>Никнейм</InputGroup.Text>
 				<Form.Control value={login} onChange={(e) => setLogin(e.target.value)} isInvalid={invalidLogin} />
-				<Form.Control.Feedback type="invalid">Пожалуйста, введите логин длиной не менее 3 символов</Form.Control.Feedback>
+				<Form.Control.Feedback type="invalid">Пожалуйста, введите логин длиной не менее 3 и не более 15 символов</Form.Control.Feedback>
 			</InputGroup>
 		</Form.Group>
 	);

@@ -93,7 +93,7 @@ function CreationNft() {
 			errors.description = "Описание НФТ не может быть длиннее 100 символов";
 		}
 		if (!data.loadedImage) {
-			errors.loadedImage = "Выберите картику НФТ";
+			errors.loadedImage = "Выберите картинку НФТ";
 		}
 
 		return errors;

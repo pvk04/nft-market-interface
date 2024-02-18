@@ -29,7 +29,8 @@ function NftCard({ index, nft, changeNft }: { index: number; nft: INft; changeNf
 				{},
 				() => {
 					nft.isOnSale = true;
-					nft.price = BigInt(price);
+					nft.price = BigInt(Number(price) * 10 ** 18);
+					nft.showPrice = String(price);
 					changeNft(nft, index);
 					refreshBalance();
 				},

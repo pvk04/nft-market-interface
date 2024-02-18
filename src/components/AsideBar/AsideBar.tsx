@@ -17,7 +17,6 @@ function AsideBar() {
 	return (
 		<aside className={styles.aside}>
 			<div className={styles.logo}>
-				{/* <img alt="logo" /> */}
 				<h1>NFT MARKET</h1>
 			</div>
 			<nav className={styles.nav}>
@@ -36,8 +35,6 @@ function AsideBar() {
 						</NavLink>
 					</li>
 					{MenuItems.map(({ name, img, href, roles }, index) => {
-						// if (roles.length && !roles.includes(Number(user.role))) return null;
-
 						return (
 							<li className={styles.navListElement} key={index}>
 								<NavLink className={({ isActive }) => (isActive ? styles.navListElementActive : ``)} to={href}>
@@ -49,10 +46,6 @@ function AsideBar() {
 					})}
 				</ul>
 			</nav>
-			{/* <button className={styles.logout}>
-				<img src="/images/logout.svg" alt="" />
-				<span>Выход</span>
-			</button> */}
 		</aside>
 	);
 }

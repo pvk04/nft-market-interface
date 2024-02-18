@@ -73,7 +73,7 @@ function LoginPage(): JSX.Element {
 		if (notRegistered) {
 			// валидация никнейма
 			setInvalidLogin(false);
-			if (login.length < 3) {
+			if (login.length < 3 || login.length > 15) {
 				setInvalidLogin(true);
 				return;
 			}

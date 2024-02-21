@@ -100,45 +100,45 @@ function CreationNft() {
 	}
 
 	async function createNft(name: string, description: string, image: string) {
-		const confirmation = await confirmDialog({
-			title: "Подтверждение",
-			description: "Вы действительно хотите создать NFT?",
-		});
+		try {
+			const confirmation = await confirmDialog({
+				title: "Подтверждение",
+				description: "Вы действительно хотите создать NFT?",
+			});
 
-		if (!confirmation) return;
-		// загрузка картинки на сервер
-		const imageUrl = await toast.promise(uploadImage(image), {
-			pending: "Загружаем изображение на сервер",
-			success: "Изображение загружено",
-			error: "Ошибка. Не удалось загрузить изображение",
-		});
+			if (!confirmation) return;
+			// загрузка картинки на сервер
+			const imageUrl = await toast.promise(uploadImage(image), {
+				pending: "Загружаем изображение на сервер",
+				success: "Изображение загружено",
+				error: "Ошибка. Не удалось загрузить изображение",
+			});
 
-		// создание НФТ в смарт контракте
-		toast.promise(
-			createTransaction(
-				user.address,
-				"mintNft",
-				[name, description, imageUrl],
-				{},
-				() => {
-					setFormData({ name: "", description: "", loadedImage: undefined });
-					if (imageInput.current) {
-						imageInput.current.value = "";
-					}
-				},
-				null,
-				null
-			),
-			{
-				pending: "Создаем НФТ",
-				success: "НФТ успешно создано",
-				error: "Ошибка. Повторите попытку позже",
-			}
-		);
-
-		//
-		// TODO: реализовать удаление картинки с сервера при отмене создания НФТ
-		//
+			// создание НФТ в смарт контракте
+			toast.promise(
+				createTransaction(
+					user.address,
+					"mintNft",
+					[name, description, imageUrl],
+					{},
+					() => {
+						setFormData({ name: "", description: "", loadedImage: undefined });
+						if (imageInput.current) {
+							imageInput.current.value = "";
+						}
+					},
+					null,
+					null
+				),
+				{
+					pending: "Создаем НФТ",
+					success: "НФТ успешно создано",
+					error: "Ошибка. Повторите попытку позже",
+				}
+			);
+		} catch (error) {
+			console.error("ОШИБКА СОЗДАНИЯ НФТ: \n".toUpperCase(), error);
+		}
 	}
 
 	return (
@@ -168,11 +168,12 @@ function CreationNft() {
 									name="description"
 									as="textarea"
 									aria-label="Описание"
-									placeholder="Что-то про НФТ..."
+									placeholder="Что-то про НФТ... (необязательно)"
 									value={formData.description}
 									onChange={handleInputChange}
 									isInvalid={!!errors.description}
 									maxLength={100}
+									style={{ maxHeight: "130px" }}
 								/>
 								<Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
 							</Form.Group>

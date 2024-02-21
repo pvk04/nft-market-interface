@@ -32,7 +32,7 @@ function OnSaleFooter({
 					value={Number(newPrice)}
 					onChange={(e) => setNewPrice(e.target.value)}
 					disabled={!editPrice}
-					placeholder="Цена"
+					placeholder="Цена, Eth"
 					aria-label="nft price"
 					type="number"
 					min="1"

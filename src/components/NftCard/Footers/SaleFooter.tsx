@@ -9,7 +9,7 @@ function SaleFooter({ sellNft }: { sellNft: (price: string | number) => void }) 
 			<Form.Control
 				value={newPrice}
 				onChange={(e) => setNewPrice(e.target.value)}
-				placeholder="Цена"
+				placeholder="Цена, Eth"
 				aria-label="nft price"
 				type="number"
 				min="1"
